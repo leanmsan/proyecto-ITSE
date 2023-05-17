@@ -14,6 +14,6 @@ def add_producto(request):
         form = ProductoForm()
     return render(request, 'add_producto.html', {'form': form})
 
-def listadoProductos(request):
+def listado_Productos(request):
     productos = Producto.objects.all()
     return render(request, 'listadoProductos.html', {'productos': productos})
