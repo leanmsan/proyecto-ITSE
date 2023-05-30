@@ -1,7 +1,8 @@
 from typing import Any
 from django import http
 from django.shortcuts import render, redirect
-#from forms import ProductoForm
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from common.models import Producto, Bateria, Filtro, Lampara, Llanta, Lubricentro, Neumatico
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -25,7 +26,6 @@ def listado_Productos(request):
     return render(request, 'listadoProductos.html', {'productos': productos})
 '''
 class ProductoView(View):
-
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -36,8 +36,12 @@ class ProductoView(View):
         if len(productos) > 0:
             datos = {'mensaje': 'exito', 'productos': productos}
         else:
-            datos = {'mensaje': 'no se encuentra productos'}
-        return JsonResponse(datos)
+            productos = list(Producto.objects.values())
+            if len(productos) > 0:
+                datos = {'mensaje': 'exito', 'productos': productos}
+            else:
+                datos = {'mensaje': 'no se encuentra productos'}
+            return JsonResponse(datos)
 
     def post(self,request):
         jd = json.loads(request.body)
@@ -48,4 +52,4 @@ class ProductoView(View):
     def put(self,request):
         pass
     def delete(self,request):
-        pass
+        pass    
