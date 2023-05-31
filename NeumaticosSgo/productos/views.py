@@ -32,7 +32,7 @@ class ProductoView(View):
     
     def post(self,request):
         jd = json.loads(request.body)
-        Producto.objects.create(nombreproducto = jd['nombreProducto'], preciocompra = jd['precioCompra'], precioventa = jd['precioVenta'], marcaproducto = jd['marcaProducto'], descripcionproducto = jd['descripcionProducto'], stockproducto = jd['stockProducto'], rubroproducto = jd['rubroProducto'])
+        Producto.objects.create(nombre = jd['nombre'], preciocompra = jd['precioCompra'], precioventa = jd['precioVenta'], marca = jd['marca'], descripcion = jd['descripcion'], stock = jd['stock'], rubro = jd['rubro'])
         datos = {'mensaje': 'success'}
         return JsonResponse(datos) 
 
@@ -55,16 +55,16 @@ class ProductoView(View):
 
     def put(self,request,id):
         jd = json.loads(request.body)
-        productos = list(Producto.objects.filter(idproducto=id).values())
+        productos = list(Producto.objects.filter(idProducto=id).values())
         if len(productos) > 0:
-            producto = Producto.objects.get(idproducto=id)
-            producto.nombreproducto = jd['nombreproducto']
+            producto = Producto.objects.get(idProducto=id)
+            producto.nombre = jd['nombre']
             producto.preciocompra = jd['preciocompra']
             producto.precioventa = jd['precioventa']
-            producto.marcaproducto = jd['marcaproducto']
-            producto.descripcionproducto = jd['descripcionproducto']
-            producto.stockproducto = jd['stockproducto']
-            producto.rubroproducto = jd['rubroproducto']
+            producto.marca = jd['marca']
+            producto.descripcion = jd['descripcion']
+            producto.stock = jd['stock']
+            producto.rubro = jd['rubro']
             producto.save()
             datos = {'mensaje': 'Producto actualizado correctamente'}
         else:
