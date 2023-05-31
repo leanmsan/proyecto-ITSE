@@ -6,6 +6,7 @@ export function ProductoCard({producto}) {
         <p>Precio Compra: {producto.preciocompra}</p>
         <p>Precio Venta: {producto.precioventa}</p>
         <p>Stock Producto: {producto.stockproducto}</p>
+        <p>Rubro Producto: {producto.rubroproducto}</p>
         <hr />
     </div>
     )
