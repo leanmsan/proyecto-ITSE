@@ -132,7 +132,7 @@ nav.close .nav-link-item a .link-name {
 .dashboard {
     position: relative;
     left: 250px;
-    background-color: var(--primary-color);
+    background-color: white;
     height: 100vh;
     width: calc(100% - 250px);
     padding: 10px 14px;
