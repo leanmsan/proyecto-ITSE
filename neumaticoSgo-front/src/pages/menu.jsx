@@ -1,4 +1,6 @@
 import {ProductoLista} from '../components/productoLista'
+import '../css/menu.css'
+import logo from '../img/logo.png'
 
 export function Menu() {
     return (
@@ -6,17 +8,16 @@ export function Menu() {
             <nav>
                 <div class="logo-name">
                     <div class="logo-image">
-                        {/*<img src="img/logo.png" alt="Logo Neumatico Santiago">*/}
+                        <img src={logo} alt="Logo Neumatico Santiago"/>
                     </div>
                 </div>
 
                 <div class="menu-items">
                     <ul class="nav-links">
                         <li class="nav-link-item">
-                            <a >
+                            <a href='/productos'>
                                 <i class="fa-solid fa-cart-flatbed nav-link-icon"></i>
-                                {/*<span class="link-name">Productos</span>*/}
-                                <ProductoLista/>
+                                <span class="link-name">Productos</span>
                             </a>
                         </li>
                         <li class="nav-link-item">
@@ -47,14 +48,15 @@ export function Menu() {
             <section class="dashboard">
                 <div class="top">
                     <i class="fa-solid fa-bars sidebar-toggle"></i>
-
                     <div class="search-box">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" placeholder="Buscar productos"/>
                     </div>
                 </div>
+                <div>
+                    <ProductoLista/>
+                </div>
             </section>
-
         </div>
     )
 }
