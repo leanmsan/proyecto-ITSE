@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+/NeumaticosSgo/productos/__pycache__
+
