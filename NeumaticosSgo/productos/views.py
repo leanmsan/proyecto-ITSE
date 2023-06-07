@@ -11,20 +11,6 @@ from django.utils.decorators import method_decorator
 import json
 # Create your views here.
 '''
-def add_producto(request):
-    if request.method == 'POST':
-        form = ProductoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('success_url')
-    else:
-        form = ProductoForm()
-    return render(request, 'add_producto.html', {'form': form})
-
-def listado_Productos(request):
-    productos = Producto.objects.all()
-    return render(request, 'listadoProductos.html', {'productos': productos})
-'''
 class ProductoView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -70,3 +56,10 @@ class ProductoView(View):
         else:
             datos = {'mensaje': 'No se encontro el producto'}
         return JsonResponse(datos)
+'''
+
+class ProductoView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+    
