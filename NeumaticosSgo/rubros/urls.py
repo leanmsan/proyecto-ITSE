@@ -4,7 +4,7 @@ from .views import RubroView
 
 urlpatterns = [
     
-    path('apiRubros/', RubroView.as_view(), name="rubros_list"),
-    path('apiRubros/<int:id_>/', RubroView.as_view(), name="rubros_process")
+    path('rubros/', RubroView.as_view(), name="rubros_list"),
+    path('rubros/<int:id_>/', RubroView.as_view(), name="rubros_process")
     
 ]
