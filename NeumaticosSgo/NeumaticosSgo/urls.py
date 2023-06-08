@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include('login.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/logout', include('login.urls'), name='logout'),
-    path('api/', include('productos.urls'))
+    path('api/', include('productos.urls'), name='productos'),
+    path('api/', include('rubros.urls'),name='rubros')
 ]
