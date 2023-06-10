@@ -22,9 +22,9 @@ class RubroView(View):
         datos = {'mensaje': 'success'}
         return JsonResponse(datos) 
 
-    def get(self,request,id_=0):
-        if id_ > 0:
-            rubros = list(Rubro.objects.filter(id=id_).values())
+    def get(self,request,id=0):
+        if id > 0:
+            rubros = list(Rubro.objects.filter(idrubro=id).values())
             if len(rubros) > 0:
                 rubros = rubros[0]
                 datos = {'mensaje': 'exito', 'rubro': rubros}
@@ -39,11 +39,11 @@ class RubroView(View):
                 datos = {'mensaje': 'no se encuentra rubros'}
             return JsonResponse(datos)
 
-    def put(self,request,id_):
+    def put(self,request,id):
         jd = json.loads(request.body)
-        rubros = list(Rubro.objects.filter(id=id_).values())
+        rubros = list(Rubro.objects.filter(idrubro=id).values())
         if len(rubros) > 0:
-            rubro = Rubro.objects.get(id=id_)
+            rubro = Rubro.objects.get(idrubro=id)
             rubro.nombre = jd['nombre']
             rubro.caracteristicas = jd['caracteristicas']
             rubro.save()
