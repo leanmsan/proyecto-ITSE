@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'common',
     'productos',
     'apiLogin',
-    'apiLogin2'
+    'apiLogin2',
+    'proveedores',
+    'rubros'
 ]
 
 REST_FRAMEWORK = {
