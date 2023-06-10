@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from common.models import Producto, Bateria, Filtro, Lampara, Llanta, Lubricentro, Neumatico
+from common.models import Producto
 
 class ProductoForm(ModelForm):
     class Meta:
