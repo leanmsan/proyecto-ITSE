@@ -18,34 +18,45 @@ class ProductoView(View):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    def post(self,request):
+    def post(self, request):
         jd = json.loads(request.body)
-        
         rubro_nombre = jd['rubro']
-        rubro, created = Rubro.objects.get_or_create(nombre=rubro_nombre)
-    
-        Producto.objects.create(nombre = jd['nombre'], descripcion = jd['descripcion'], preciocompra = jd['preciocompra'], precioventa = jd['precioventa'], marca = jd['marca'], stockdisponible = jd['stockdisponible'], rubro = rubro, caracteristicas = jd['caracteristicas'])
-        datos = {'mensaje': 'success'}
-        return JsonResponse(datos) 
+        try:
+            rubro = Rubro.objects.get(nombre=rubro_nombre)
+        except Rubro.DoesNotExist:
+            rubro = None
+        if rubro:
+            producto = Producto.objects.create(nombre=jd['nombre'], descripcion=jd['descripcion'], preciocompra=jd['preciocompra'], precioventa=jd['precioventa'], marca=jd['marca'], stockdisponible=jd['stockdisponible'], rubro=rubro, caracteristicas=jd['caracteristicas'])
+            datos = {'mensaje': 'success'}
+        else:
+            datos = {'mensaje': 'El rubro no existe'}
+        return JsonResponse(datos)
 
-    def get(self,request,id=0):
+    def get(self, request, id=0, rubro=None):
         if id > 0:
             productos = list(Producto.objects.filter(idproducto=id).values())
             if len(productos) > 0:
                 producto = productos[0]
                 datos = {'mensaje': 'exito', 'producto': producto}
             else:
-                datos = {'mensaje': 'no se encuentra productos'}
+                datos = {'mensaje': 'No se encontró el producto'}
             return JsonResponse(datos)
         else:
-            productos = list(Producto.objects.values())
-            if len(productos) > 0:
-                datos = {'mensaje': 'exito', 'productos': productos}
+            if rubro:
+                productos = list(Producto.objects.filter(rubro=rubro).values())
             else:
-                datos = {'mensaje': 'no se encuentra productos'}
-            return JsonResponse(datos)
+                productos = list(Producto.objects.values())
 
-    def put(self,request,id):
+            if len(productos) > 0:
+                datos = {'mensaje': 'exito', 'cantidad': len(productos),'productos': productos}
+            else:
+                datos = {'mensaje': 'No se encontraron productos'}
+        
+        return JsonResponse(datos)
+
+
+
+    def put(self, request, id):
         jd = json.loads(request.body)
         productos = list(Producto.objects.filter(idproducto=id).values())
         if len(productos) > 0:
@@ -55,11 +66,19 @@ class ProductoView(View):
             producto.precioventa = jd['precioventa']
             producto.marca = jd['marca']
             producto.descripcion = jd['descripcion']
-            producto.stockdisponible = jd['stock']
-            producto.rubro = jd['rubro']
+            producto.stockdisponible = jd['stockdisponible']
+            rubro_nombre = jd['rubro_nombre']
+            rubro_previo = producto.rubro
+            try:
+                rubro = Rubro.objects.get(nombre=rubro_nombre)
+                producto.rubro = rubro
+            except Rubro.DoesNotExist:
+                producto.rubro = rubro_previo
             producto.caracteristicas = jd['caracteristicas']
             producto.save()
             datos = {'mensaje': 'Producto actualizado correctamente'}
         else:
-            datos = {'mensaje': 'No se encontro el producto'}
+            datos = {'mensaje': 'No se encontró el producto'}
         return JsonResponse(datos)
+
+

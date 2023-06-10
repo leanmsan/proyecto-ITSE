@@ -122,19 +122,28 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class Movimientos(models.Model):
-    idmovimiento = models.AutoField(db_column='IdMovimiento', primary_key=True)  # Field name made lowercase.
-    idproducto = models.ForeignKey('Producto', models.DO_NOTHING, db_column='IdProducto', blank=True, null=True)  # Field name made lowercase.
-    tipomovimiento = models.CharField(db_column='TipoMovimiento', max_length=10, blank=True, null=True)  # Field name made lowercase.
-    fecha = models.DateField(db_column='Fecha', blank=True, null=True)  # Field name made lowercase.
-    hora = models.TimeField(db_column='Hora', blank=True, null=True)  # Field name made lowercase.
-    cantidad = models.IntegerField(db_column='Cantidad', blank=True, null=True)  # Field name made lowercase.
-    preciomovimiento = models.DecimalField(db_column='PrecioMovimiento', max_digits=10, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    idproveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='IdProveedor', blank=True, null=True)  # Field name made lowercase.
+class Movimiento(models.Model):
+    idmovimiento = models.AutoField(db_column='idMovimiento', primary_key=True)  # Field name made lowercase.
+    idproveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='idProveedor', blank=True, null=True)  # Field name made lowercase.
+    fecha = models.DateTimeField(blank=True, null=True)
+    tipomovimiento = models.CharField(db_column='tipoMovimiento', max_length=7, blank=True, null=True)  # Field name made lowercase.
+    montototal = models.DecimalField(db_column='montoTotal', max_digits=10, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'movimientos'
+        db_table = 'movimiento'
+
+
+class Movimientodetalle(models.Model):
+    idmovimiento = models.IntegerField(db_column='idMovimiento', primary_key=True)  # Field name made lowercase. The composite primary key (idMovimiento, idProducto) found, that is not supported. The first column is selected.
+    idproducto = models.ForeignKey('Producto', models.DO_NOTHING, db_column='idProducto')  # Field name made lowercase.
+    cantidad = models.IntegerField()
+    preciounitario = models.DecimalField(db_column='precioUnitario', max_digits=10, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'movimientodetalle'
+        unique_together = (('idmovimiento', 'idproducto'),)
 
 
 class Producto(models.Model):
@@ -146,7 +155,7 @@ class Producto(models.Model):
     marca = models.CharField(db_column='Marca', max_length=40, blank=True, null=True)  # Field name made lowercase.
     stockdisponible = models.IntegerField(db_column='StockDisponible', blank=True, null=True)  # Field name made lowercase.
     rubro = models.ForeignKey('Rubro', models.DO_NOTHING, db_column='Rubro', to_field='nombre', blank=True, null=True)  # Field name made lowercase.
-    caracteristicas = models.JSONField(blank=True, null=True)
+    caracteristicas = models.JSONField(db_column='Caracteristicas', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -171,9 +180,9 @@ class Proveedor(models.Model):
 
 
 class Rubro(models.Model):
-    id = models.IntegerField(db_column='Id', primary_key=True)
-    nombre = models.CharField(db_column='Nombre', max_length=30, unique=True)
-    caracteristicas = models.JSONField(blank=True, null=True)
+    idrubro = models.AutoField(db_column='IdRubro', primary_key=True)  # Field name made lowercase.
+    nombre = models.CharField(db_column='nombre', unique=True, max_length=20, blank=True, null=True)  # Field name made lowercase.
+    caracteristicas = models.JSONField(db_column='Caracteristicas')  # Field name made lowercase.
 
     class Meta:
         managed = False
