@@ -1,6 +1,8 @@
-import {ProductoLista} from '../components/productoLista'
+
 import '../css/menu.css'
 import logo from '../img/logo.png'
+import { TablaProducto } from '../components/tablaProducto'
+
 
 export function Menu() {
     return (
@@ -54,7 +56,7 @@ export function Menu() {
                     </div>
                 </div>
                 <div>
-                    <ProductoLista/>
+                    <TablaProducto/>
                 </div>
             </section>
         </div>
