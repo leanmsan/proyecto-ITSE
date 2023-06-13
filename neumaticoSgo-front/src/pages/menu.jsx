@@ -1,7 +1,7 @@
 
 import '../css/menu.css'
 import logo from '../img/logo.png'
-import { TablaProducto } from '../components/tablaProducto'
+import { TablaProductos } from '../components/tablaProducto'
 
 
 export function Menu() {
@@ -56,7 +56,7 @@ export function Menu() {
                     </div>
                 </div>
                 <div>
-                    <TablaProducto/>
+                    <TablaProductos></TablaProductos>
                 </div>
             </section>
         </div>
