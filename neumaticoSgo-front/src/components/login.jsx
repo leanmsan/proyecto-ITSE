@@ -1,12 +1,14 @@
 import { useState } from "react";
 import "../css/login.css"
 import LoginLogo from "../img/logo.png";
+import { Navigate, useNavigate  } from "react-router-dom";
 
 export function Login() {
-
+    const [redirect, setRedirect] = useState(false)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navegate = useNavigate()
 
      const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -23,7 +25,7 @@ export function Login() {
         console.log(`Password: ${password}`);
 
         try {
-            const response = await fetch('/api/login', {
+            const response = await fetch('http://127.0.0.1:8000/api2/api-token-auth/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -34,6 +36,7 @@ export function Login() {
             if (response.ok) {
               // Autenticación exitosa, realizar acciones necesarias (redireccionar, guardar token, etc.)
               console.log('Inicio de sesión exitoso');
+              navegate('/Menu')
             } else {
               // Autenticación fallida, mostrar mensaje de error
               const errorData = await response.json();
@@ -57,7 +60,7 @@ export function Login() {
                     <i className="fa-solid fa-lock"></i>
                     <input type="password" id="password" value={password} onChange={handlePasswordChange} required/>
                 </div>
-                <button type="Submit">Iniciar sesion</button>
+                <button type="Submit" >Iniciar sesion</button>
             </form>
         </div>
     )
