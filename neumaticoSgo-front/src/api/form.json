@@ -1,0 +1,22 @@
+[
+    {
+      "label": "Nombre",
+      "type": "text",
+      "name": "nombre"
+    },
+    {
+      "label": "Marca",
+      "type": "text",
+      "name": "marca"
+    },
+    {
+      "label": "Modelo",
+      "type": "text",
+      "name": "modelo"
+    },
+    {
+      "label": "Rodado",
+      "type": "number",
+      "name": "rodado"
+    }
+  ]

@@ -1,4 +1,4 @@
-import {ProductoLista} from '../components/productoLista'
+import {Link } from 'react-router-dom'
 import '../css/menu.css'
 import logo from '../img/logo.png'
 
@@ -15,35 +15,36 @@ export function Menu() {
                 <div className="menu-items">
                     <ul className="nav-links">
                         <li className="nav-link-item">
-                            <a href='/productos'>
+                            <Link to="/productos">
                                 <i className="fa-solid fa-cart-flatbed nav-link-icon"></i>
                                 <span className="link-name">Productos</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-link-item">
-                            <a href="#">
+                            <Link to="altaproducto">
                                 <i className="fa-solid fa-square-plus nav-link-icon"></i>
                                 <span className="link-name">Alta de producto</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-link-item">
-                            <a href="#">
+                            <Link to="/proveedores">
                                 <i className="fa-solid fa-person-circle-plus nav-link-icon"></i>
                                 <span className="link-name">Proveedores</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
 
                     <ul className="logout-mod">
                         <li className="nav-link-item">
-                            <a href="#">
+                            <Link to="#">
                                 <i className="fa-solid fa-right-from-bracket nav-link-icon"></i>
                                 <span className="link-name">Salir</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
             </nav>
+            
 
             <section className="dashboard">
                 <div className="top">
@@ -52,9 +53,6 @@ export function Menu() {
                         <i className="fa-solid fa-magnifying-glass"></i>
                         <input type="text" placeholder="Buscar productos"/>
                     </div>
-                </div>
-                <div>
-                    <ProductoLista/>
                 </div>
             </section>
         </div>
