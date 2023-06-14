@@ -5,18 +5,33 @@
       "name": "nombre"
     },
     {
+      "label": "Descripcion",
+      "type": "text",
+      "name": "descripcion"
+    },
+    {
+      "label": "Precio de compra",
+      "type": "text",
+      "name": "precioCompra"
+    },
+    {
+      "label": "Precio de venta",
+      "type": "text",
+      "name": "precioVenta"
+    },
+    {
       "label": "Marca",
       "type": "text",
       "name": "marca"
     },
     {
-      "label": "Modelo",
-      "type": "text",
-      "name": "modelo"
+      "label": "Stock",
+      "type": "number",
+      "name": "stock"
     },
     {
-      "label": "Rodado",
-      "type": "number",
-      "name": "rodado"
+      "label": "Rubro",
+      "type": "text",
+      "name": "rubro"
     }
   ]

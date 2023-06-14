@@ -2,9 +2,9 @@ import {Link } from 'react-router-dom'
 import '../css/menu.css'
 import logo from '../img/logo.png'
 
-export function Menu() {
+
+function Sidebar() {
     return (
-        <div>
             <nav>
                 <div className="logo-name">
                     <div className="logo-image">
@@ -21,7 +21,7 @@ export function Menu() {
                             </Link>
                         </li>
                         <li className="nav-link-item">
-                            <Link to="altaproducto">
+                            <Link to="/altaproducto">
                                 <i className="fa-solid fa-square-plus nav-link-icon"></i>
                                 <span className="link-name">Alta de producto</span>
                             </Link>
@@ -36,7 +36,7 @@ export function Menu() {
 
                     <ul className="logout-mod">
                         <li className="nav-link-item">
-                            <Link to="#">
+                            <Link to="/login">
                                 <i className="fa-solid fa-right-from-bracket nav-link-icon"></i>
                                 <span className="link-name">Salir</span>
                             </Link>
@@ -44,17 +44,28 @@ export function Menu() {
                     </ul>
                 </div>
             </nav>
-            
+    )
+}
 
-            <section className="dashboard">
-                <div className="top">
-                    <i className="fa-solid fa-bars sidebar-toggle"></i>
-                    <div className="search-box">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" placeholder="Buscar productos"/>
-                    </div>
+function NavBar() {
+    return (
+        <div>
+            <div className="top">
+                <i className="fa-solid fa-bars sidebar-toggle"></i>
+                <div className="search-box">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar productos"/>
                 </div>
-            </section>
+            </div>
+    </div>
+    )
+}
+
+export function Menu() {
+    return (
+        <div>
+            <Sidebar/>
+            <NavBar/>
         </div>
     )
 }

@@ -78,3 +78,9 @@
     font-size: 1em;
     border-radius: 5px;
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 15PX;
+  }
