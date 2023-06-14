@@ -129,22 +129,9 @@ nav.close .nav-link-item a .link-name {
     border-top: 1px solid #f9c4405d;
 }
 
-.dashboard {
+.top {
     position: relative;
     left: 250px;
-    background-color: white;
-    height: 100vh;
-    width: calc(100% - 250px);
-    padding: 10px 14px;
-    transition: var(--tran-05);
-}
-
-nav.close ~ .dashboard {
-    left: 73px;
-    width: calc(100% - 73px);
-}
-
-.dashboard .top {
     position: fixed;
     left: 250px;
     top: 0;
@@ -156,12 +143,17 @@ nav.close ~ .dashboard {
     transition: var(--tran-05);
 }
 
-nav.close ~ .dashboard .top {
+nav.close ~ .top {
     left: 73px;
     width: calc(100% - 73px);
 }
 
-.dashboard .top .sidebar-toggle {
+nav.close ~ .top {
+    left: 73px;
+    width: calc(100% - 73px);
+}
+
+.top .sidebar-toggle {
     display: flex;
     align-items: center;
     font-size: 26px;
@@ -169,7 +161,7 @@ nav.close ~ .dashboard .top {
     cursor: pointer;
 }
 
-.dashboard .top .search-box {
+.top .search-box {
     position: relative;
     height: 45px;
     max-width: 600px;
@@ -177,7 +169,7 @@ nav.close ~ .dashboard .top {
     margin: 0 30px;
 }
 
-.dashboard .top .search-box input {
+.top .search-box input {
     position: absolute;
     border: 2px solid #f9c4405d;
     border-radius: 5px;
@@ -192,11 +184,11 @@ nav.close ~ .dashboard .top {
     outline: none;
 }
 
-.dashboard .top .search-box input::placeholder {
+.top .search-box input::placeholder {
     color: rgba(255, 255, 255, 0.677);
 }
 
-.dashboard .top .search-box i {
+.top .search-box i {
     position: absolute;
     font-size: 22px;
     left: 15px;

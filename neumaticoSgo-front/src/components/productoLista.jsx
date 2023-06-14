@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import {getAllProductos} from '../api/productos'
 import {ProductoCard} from './ProductoCard'
+
 export function ProductoLista () {
     const [productos, setProductos] = useState([])
     useEffect(() => {
@@ -13,7 +14,8 @@ export function ProductoLista () {
     },[])
         console.log(productos,"esto es productos")
     return(
-        <div> 
+        <div>
+            
             {productos.map(producto => (
                 <ProductoCard key={producto.idproducto} producto={producto} />
 

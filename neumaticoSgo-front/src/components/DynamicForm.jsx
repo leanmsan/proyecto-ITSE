@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import formData from '../api/form.json';
+import "../css/form.css"
+import { Menu } from '../pages/menu';
 
 export function DynamicForm() {
 
@@ -10,9 +12,14 @@ export function DynamicForm() {
       };
 
     return (
-        <form>
+      <div className='container'>
+      <Menu className="menu"/>
+        <form className='form'>
+          <h1 className='title' >Alta de producto</h1>
       {formData.map((field) => (
-        <div key={field.name}>
+        <div key={field.name}
+        className='input-control'
+        >
           <label>{field.label}</label>
           <input
             type={field.type}
@@ -22,7 +29,8 @@ export function DynamicForm() {
           />
         </div>
       ))}
-      <button type="submit">Enviar</button>
+      <button className='button' type="submit">Enviar</button>
     </form>
+    </div>
     )
 }
