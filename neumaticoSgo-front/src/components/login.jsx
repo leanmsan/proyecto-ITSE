@@ -1,24 +1,38 @@
 import { useState } from "react";
 import "../css/login.css"
 import LoginLogo from "../img/logo.png";
+import { Navigate, useNavigate  } from "react-router-dom";
 
 export function Login() {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const navegate = useNavigate()
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
+    event.preventDefault(); 
+    console.log(`username: ${username}`);
+    console.log(`password: ${password}`);
     const response = await fetch('http://127.0.0.1:8000/api2/api-token-auth/', {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({ username, password }),
     });
 
     if (response.ok) {
-      setData(await response.json());
+      console.log('Inicio de Sesion Exitoso')
+      navegate('/Menu')
     } else {
       setError(true)
     }
@@ -31,11 +45,11 @@ export function Login() {
                 <h1 className="login-title">Login</h1>
                 <div className="login-label">
                     <i className="fa-solid fa-user"></i>
-                    <input type="text" id="username" />
+                    <input type="text" id="username" value={username} onChange={handleUsernameChange}/>
                 </div>
                 <div className="login-label">    
                     <i className="fa-solid fa-lock"></i>
-                    <input type="password" id="password" />
+                    <input type="password" id="password" value={password} onChange={handlePasswordChange}/>
                     {error && <div className="error-message">Los datos ingresados no son correctos</div>}
                 </div>
                 
