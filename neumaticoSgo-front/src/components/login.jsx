@@ -45,11 +45,11 @@ export function Login() {
                 <h1 className="login-title">Login</h1>
                 <div className="login-label">
                     <i className="fa-solid fa-user"></i>
-                    <input type="text" id="username" value={username} onChange={handleUsernameChange}/>
+                    <input type="text" id="username" value={username} placeholder="usuario" onChange={handleUsernameChange}/>
                 </div>
                 <div className="login-label">    
                     <i className="fa-solid fa-lock"></i>
-                    <input type="password" id="password" value={password} onChange={handlePasswordChange}/>
+                    <input type="password" id="password" value={password} placeholder="contraseña" onChange={handlePasswordChange}/>
                     {error && <div className="error-message">Los datos ingresados no son correctos</div>}
                 </div>
                 
