@@ -159,6 +159,7 @@ nav.close ~ .top {
     font-size: 26px;
     color: var(--secondary-color);
     cursor: pointer;
+    display: none;
 }
 
 .top .search-box {
@@ -167,6 +168,12 @@ nav.close ~ .top {
     max-width: 600px;
     width: 100%;
     margin: 0 30px;
+}
+
+@media (max-width: 800px){
+    .dashboard .top .sidebar-toggle{
+        display: block;
+    }
 }
 
 .top .search-box input {
