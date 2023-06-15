@@ -167,6 +167,13 @@ nav.close ~ .dashboard .top {
     font-size: 26px;
     color: var(--secondary-color);
     cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 800px){
+    .dashboard .top .sidebar-toggle{
+        display: block;
+    }
 }
 
 .dashboard .top .search-box {

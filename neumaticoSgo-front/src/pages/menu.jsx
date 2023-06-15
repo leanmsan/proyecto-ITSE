@@ -1,6 +1,7 @@
 import {Link } from 'react-router-dom'
 import '../css/menu.css'
 import logo from '../img/logo.png'
+import { TablaProductos } from '../components/TablaProductos'
 
 export function Menu() {
     return (
@@ -54,6 +55,7 @@ export function Menu() {
                         <input type="text" placeholder="Buscar productos"/>
                     </div>
                 </div>
+                <TablaProductos/>
             </section>
         </div>
     )
