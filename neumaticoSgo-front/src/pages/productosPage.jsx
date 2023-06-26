@@ -1,7 +1,7 @@
-import { ProductoLista} from '../components/productoLista'
+import { TablaProductos } from './components/TablaProductos'
 
 export function ProductosPage() {
     return (
-    <ProductoLista/>
+        <TablaProductos/>
     )
 }

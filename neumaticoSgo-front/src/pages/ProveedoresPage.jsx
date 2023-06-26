@@ -1,10 +1,11 @@
-import { Menu } from "./menu"
+import { PaginaProducto} from '../pages/productosPage'
+import { TablaProveedores } from '../components/TablaProveedores'
 
 export function ProovedoresPage(){
     return (
         <div>
-            <Menu/>
-            <p>Proovedores</p>
+            <PaginaProducto/>
+            <TablaProveedores/>
         </div>
     )
 }
