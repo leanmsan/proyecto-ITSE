@@ -2,9 +2,11 @@ import {Link } from 'react-router-dom'
 import '../css/menu.css'
 import logo from '../img/logo.png'
 import { TablaProductos } from '../components/TablaProductos'
+import { TablaProveedores } from '../components/TablaProveedores'
+import { useState } from 'react'
 
 
-function Sidebar() {
+function Sidebar({handleTabClick, selectedTab}) {
     return (
             <nav>
                 <div className="logo-name">
@@ -16,19 +18,19 @@ function Sidebar() {
                 <div className="menu-items">
                     <ul className="nav-links">
                         <li className="nav-link-item">
-                            <Link to="/productos">
+                            <Link to="/productos" onClick={() => handleTabClick('productos')}>
                                 <i className="fa-solid fa-cart-flatbed nav-link-icon"></i>
                                 <span className="link-name">Productos</span>
                             </Link>
                         </li>
                         <li className="nav-link-item">
-                            <Link to="/altaproducto">
+                            <Link to="/altaproducto" >
                                 <i className="fa-solid fa-square-plus nav-link-icon"></i>
                                 <span className="link-name">Alta de producto</span>
                             </Link>
                         </li>
                         <li className="nav-link-item">
-                            <Link to="/proveedores">
+                            <Link to="/proveedores" onClick={() => handleTabClick('proveedores')}>
                                 <i className="fa-solid fa-person-circle-plus nav-link-icon"></i>
                                 <span className="link-name">Proveedores</span>
                             </Link>
@@ -62,12 +64,31 @@ function NavBar() {
     )
 }
 
+
+
+
 export function Menu() {
+    
+    const [selectedTab, setSelectedTab] = useState('productos');
+    
+    const handleTabClick = (tab) => {
+        setSelectedTab(tab);
+      };
+
+    
+
+
+    
     return (
         <div>
-            <Sidebar/>
+            <Sidebar handleTabClick = {handleTabClick} selectedTab = {selectedTab}/>
             <NavBar/>
-            <TablaProductos/>
+            {selectedTab === 'productos' ? (
+        <TablaProductos />
+      ) : (
+        <TablaProveedores/>
+
+      )}
         </div>
     )
 }
