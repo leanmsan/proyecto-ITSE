@@ -3,7 +3,7 @@ import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper
 import axios from 'axios';
 
 export const TablaProveedores = () => {
-  const [productos, setData] = useState([]);
+  const [proveedores, setData] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -35,7 +35,7 @@ export const TablaProveedores = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {productos.map((row) => (
+          {proveedores.map((row) => (
             <TableRow key={row.idproveedor}>
               <TableCell>{row.nombre}</TableCell>
               <TableCell style={{ textTransform: 'capitalize'}}>{row.cuitproveedor}</TableCell>
