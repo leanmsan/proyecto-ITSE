@@ -1,1 +1,29 @@
 # proyecto-ITSE
+
+Dependencias de Django:
+Package                       Version
+----------------------------- -------
+asgiref                       3.6.0
+Django                        4.2
+django-cors-headers           4.0.0
+django-rest-framework         0.1.0
+django-seed                   0.3.1
+djangorestframework           3.14.0
+djangorestframework-simplejwt 5.2.2
+Faker                         18.5.1
+mysqlclient                   2.1.1
+mysqlconnect                  1.0.0
+numpy                         1.24.2
+pandas                        2.0.0
+pip                           23.1.2
+psycopg2-binary               2.9.6
+PyJWT                         2.7.0
+PyMySQL                       1.0.2
+python-dateutil               2.8.2
+pytz                          2023.3
+rest-framework-simplejwt      0.0.2
+setuptools                    65.5.0
+six                           1.16.0
+sqlparse                      0.4.4
+toposort                      1.10
+tzdata                        2023.3
