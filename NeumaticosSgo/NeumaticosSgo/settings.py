@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -115,7 +114,7 @@ DATABASES = {
           'NAME': 'NeumaticosSgo1',
           'USER': 'admin',
           'PASSWORD': 'admin',
-          'HOST': '127.0.0.1',
+          'HOST': '192.168.0.20',
           'PORT': '3306',
     }
 }
