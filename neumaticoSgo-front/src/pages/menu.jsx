@@ -3,7 +3,7 @@ import '../css/menu.css'
 import logo from '../img/logo.png'
 import { TablaProductos } from '../components/TablaProductos'
 import { TablaProveedores } from '../components/TablaProveedores'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 
 function Sidebar({handleTabClick, selectedTab}) {
