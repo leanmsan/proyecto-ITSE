@@ -20,6 +20,7 @@ export const TablaProveedores = () => {
   };
 
   return (
+
     <TableContainer style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
       <Table>
         <TableHead>

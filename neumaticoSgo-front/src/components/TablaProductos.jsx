@@ -20,7 +20,7 @@ export const TablaProductos = () => {
   };
 
   return (
-    <TableContainer style={{"margin-top": "80px", "margin-left": "10px", "padding": "5px"}} component={Paper}>
+    <TableContainer style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
