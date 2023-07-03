@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import formData from '../api/form.json';
 import "../css/form.css"
-import { Menu } from '../pages/menu';
+import { Sidebar } from './Sidebar';
+import { NavBar } from './NavBar';
 
 export function DynamicForm() {
 
@@ -13,7 +14,8 @@ export function DynamicForm() {
 
     return (
       <div className='container'>
-      <Menu className="menu"/>
+      <Sidebar/>
+      <NavBar/>
         <form className='form'>
           <h1 className='title' >Alta de producto</h1>
       {formData.map((field) => (

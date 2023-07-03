@@ -1,7 +1,10 @@
-import { ProductoLista} from '../components/productoLista'
+import { Menu } from "./menu"
 
-export function ProductosPage() {
+export function ProductosPage(){
     return (
-    <ProductoLista/>
+        <div>
+            <Menu/>
+            <p>Productos</p>
+        </div>
     )
 }
