@@ -3,7 +3,7 @@ import "../css/login.css"
 import LoginLogo from "../img/logo.png";
 import { Navigate, useNavigate  } from "react-router-dom";
 
-export function Login() {
+export function Login({handleAuthentication }) {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
   const [username, setUsername] = useState("")
@@ -32,6 +32,7 @@ export function Login() {
 
     if (response.ok) {
       console.log('Inicio de Sesion Exitoso')
+      handleAuthentication(true)
       navegate('/Menu')
     } else {
       setError(true)

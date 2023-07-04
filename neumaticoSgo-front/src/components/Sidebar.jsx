@@ -13,32 +13,33 @@ export function Sidebar({handleTabClick, selectedTab}) {
 
                 <div className="menu-items">
                     <ul className="nav-links">
-                        <li className="nav-link-item">
-                            <Link to="/inicio" onClick={() => handleTabClick('inicio')}>
+                    <li className={`nav-link-item ${selectedTab === 'inicio' ? 'active' : ''}`}>
+                            <Link to="/inicio" >
                                 <i className="fa-solid fa-house-chimney nav-link-icon"></i>
                                 <span className="link-name">Inicio</span>
                             </Link>
                         </li>
-                        <li className="nav-link-item">
-                            <Link to="/productos" onClick={() => handleTabClick('productos')}>
+                        <li className={`nav-link-item ${selectedTab === 'productos' ? 'active' : ''}`}>
+                            <Link to="/productos" >
                                 <i className="fa-solid fa-cart-flatbed nav-link-icon"></i>
                                 <span className="link-name">Productos</span>
                             </Link>
                         </li>
-                        <li className="nav-link-item">
-                            <Link to="/altaproducto" >
+                        <li className={`nav-link-item ${selectedTab === 'altaProducto' ? 'active' : ''}`}>
+                        <Link to="/altaproducto" >
                                 <i className="fa-solid fa-square-plus nav-link-icon"></i>
                                 <span className="link-name">Alta de producto</span>
                             </Link>
                         </li>
-                        <li className="nav-link-item">
-                            <Link to="/proveedores" onClick={() => handleTabClick('proveedores')}>
+                        <li className={`nav-link-item ${selectedTab === 'proveedores' ? 'active' : ''}`}>
+                            <Link to="/proveedores" >
                                 <i className="fa-solid fa-person-circle-plus nav-link-icon"></i>
                                 <span className="link-name">Proveedores</span>
                             </Link>
                         </li>
-                        <li className="nav-link-item">
-                            <Link to="/movimientos" onClick={() => handleTabClick('movimientos')}>
+                        <li className={`nav-link-item ${selectedTab === 'movimientos' ? 'active' : ''}`}>
+                            <Link to="/movimientos" 
+                            >
                                 <i className="fa-solid fa-cash-register nav-link-icon"></i>
                                 <span className="link-name">Movimientos</span>
                             </Link>
@@ -47,10 +48,10 @@ export function Sidebar({handleTabClick, selectedTab}) {
 
                     <ul className="logout-mod">
                         <li className="nav-link-item">
-                            <Link to="/login">
+                            
                                 <i className="fa-solid fa-right-from-bracket nav-link-icon"></i>
                                 <span className="link-name">Salir</span>
-                            </Link>
+                            
                         </li>
                     </ul>
                 </div>
