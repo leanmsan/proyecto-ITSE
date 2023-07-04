@@ -1,10 +1,15 @@
-import { Menu } from "./menu"
+import { Sidebar } from "../components/Sidebar"
+import { NavBar } from "../components/NavBar"
+import { TablaProductos } from "../components/tablaproductos"
+
 
 export function ProductosPage(){
     return (
         <div>
-            <Menu/>
-            <p>Productos</p>
+            <NavBar/>
+            <Sidebar/>
+            <TablaProductos/>
+
         </div>
     )
 }
