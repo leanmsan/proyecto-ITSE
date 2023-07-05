@@ -71,7 +71,7 @@ class ProductoView(View):
             rubro_previo = producto.rubro
             try:
                 rubro = Rubro.objects.get(nombre=rubro_id)
-                producto.rubro = rubro
+                producto.rubro = rubro # type: ignore
             except Rubro.DoesNotExist:
                 producto.rubro = rubro_previo
             producto.caracteristicas = jd['caracteristicas']

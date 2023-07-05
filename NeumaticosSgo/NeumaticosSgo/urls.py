@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/', include('productos.urls'), name='productos'),
     path('api/', include('rubros.urls'),name='rubros'),
     path('api/', include('proveedores.urls'),name='proveedores'),
+    path('api/', include('movimientos.urls'),name='movimientos'),
     path('api/token/', obtain_auth_token, name='api_token_auth'),
     path('api/', include('apiLogin.urls')),
     path('api2/', include('apiLogin2.urls'))
