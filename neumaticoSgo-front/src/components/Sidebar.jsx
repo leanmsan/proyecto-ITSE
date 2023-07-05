@@ -37,11 +37,25 @@ export function Sidebar({handleTabClick, selectedTab}) {
                                 <span className="link-name">Proveedores</span>
                             </Link>
                         </li>
+
+                        <li className={`nav-link-item ${selectedTab === 'proveedores' ? 'active' : ''}`}>
+                            <Link to="/altaproveedores" >
+                                <i className="fa-solid fa-person-circle-plus nav-link-icon"></i>
+                                <span className="link-name">Alta de Proveedores</span>
+                            </Link>
+                        </li>
                         <li className={`nav-link-item ${selectedTab === 'movimientos' ? 'active' : ''}`}>
-                            <Link to="/movimientos" 
+                            <Link to="/entradas" 
                             >
                                 <i className="fa-solid fa-cash-register nav-link-icon"></i>
-                                <span className="link-name">Movimientos</span>
+                                <span className="link-name">Entradas</span>
+                            </Link>
+                        </li>
+                        <li className={`nav-link-item ${selectedTab === 'movimientos' ? 'active' : ''}`}>
+                            <Link to="/salidas" 
+                            >
+                                <i className="fa-solid fa-cash-register nav-link-icon"></i>
+                                <span className="link-name">Salidas</span>
                             </Link>
                         </li>
                     </ul>
