@@ -20,9 +20,9 @@ class ProductoView(View):
 
     def post(self, request):
         jd = json.loads(request.body)
-        rubro_nombre = jd['rubro']
+        rubro_id = jd['rubro_id']
         try:
-            rubro = Rubro.objects.get(nombre=rubro_nombre)
+            rubro = Rubro.objects.get(nombre=rubro_id)
         except Rubro.DoesNotExist:
             rubro = None
         if rubro:
@@ -67,10 +67,10 @@ class ProductoView(View):
             producto.marca = jd['marca']
             producto.descripcion = jd['descripcion']
             producto.stockdisponible = jd['stockdisponible']
-            rubro_nombre = jd['rubro_nombre']
+            rubro_id = jd['rubro_id']
             rubro_previo = producto.rubro
             try:
-                rubro = Rubro.objects.get(nombre=rubro_nombre)
+                rubro = Rubro.objects.get(nombre=rubro_id)
                 producto.rubro = rubro
             except Rubro.DoesNotExist:
                 producto.rubro = rubro_previo
@@ -80,5 +80,3 @@ class ProductoView(View):
         else:
             datos = {'mensaje': 'No se encontró el producto'}
         return JsonResponse(datos)
-
-
