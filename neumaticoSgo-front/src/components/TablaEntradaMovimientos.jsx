@@ -6,8 +6,9 @@ import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper
 
 export const TablaEntradasMovimientos = () => {
   const [entradas, setEntradas] = useState([]);
-  const [entradasDetalle, setEntradaDetalle] = useState([])
-
+  const [entradasDetalle, setEntradasDetalle] = useState([]);
+  const [selectedEntrada, setSelectedEntrada] = useState(null);
+  const [showEntradasDetalle, setShowEntradasDetalle] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -15,17 +16,21 @@ export const TablaEntradasMovimientos = () => {
 
   const fetchData = async () => {
     try {
-      const responseEntradas = await axios.get('http://127.0.0.1:8000/api/entradas/'); // Reemplaza 'URL_DE_TU_API' con la URL real de tu API
-      const responseEntradasDetalles = await axios.get('http://127.0.0.1:8000/api/entrada_detalles/')
+      const responseEntradas = await axios.get('http://127.0.0.1:8000/api/entradas/');
+      const responseEntradasDetalles = await axios.get('http://127.0.0.1:8000/api/entrada_detalles/');
       setEntradas(responseEntradas.data.entradas);
-      console.log(responseEntradas.data.entradas)
-      setEntradaDetalle(responseEntradasDetalles.data.entradas)
-      console.log('esto es entradas detalle', responseEntradasDetalles.data)
+      setEntradasDetalle(responseEntradasDetalles.data.entradas);
     } catch (error) {
       console.error('Error al obtener los datos:', error);
     }
   };
+
   const renderEntradas = () => {
+    const handleEntradaClick = (identrada) => {
+      setSelectedEntrada(identrada);
+      setShowEntradasDetalle(true);
+    };
+
     return (
       <TableContainer component={Paper} style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}}>
         <Table>
@@ -39,7 +44,7 @@ export const TablaEntradasMovimientos = () => {
           </TableHead>
           <TableBody>
             {entradas.map((entrada) => (
-              <TableRow key={entrada.identrada}>
+              <TableRow key={entrada.identrada} onClick={() => handleEntradaClick(entrada.identrada)}>
                 <TableCell>{entrada.identrada}</TableCell>
                 <TableCell>{entrada.idproveedor_id}</TableCell>
                 <TableCell>{entrada.fecha}</TableCell>
@@ -53,29 +58,44 @@ export const TablaEntradasMovimientos = () => {
   };
 
   const renderEntradasDetalle = () => {
+    const filteredEntradasDetalle = entradasDetalle.filter(
+      (entradaDetalle) => entradaDetalle.identrada_id === selectedEntrada
+    );
+
+    const handleCloseEntradasDetalle = () => {
+      setShowEntradasDetalle(false);
+    };
+
     return (
-      <TableContainer component={Paper} style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID Entrada</TableCell>
-              <TableCell>ID Producto</TableCell>
-              <TableCell>Cantidad</TableCell>
-              <TableCell>Precio Unitario</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {entradasDetalle.map((entradaDetalle) => (
-              <TableRow key={`${entradaDetalle.identrada_id}-${entradaDetalle.idproducto_id}`}>
-                <TableCell>{entradaDetalle.identrada_id}</TableCell>
-                <TableCell>{entradaDetalle.idproducto_id}</TableCell>
-                <TableCell>{entradaDetalle.cantidad}</TableCell>
-                <TableCell>{entradaDetalle.preciounitario}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <>
+        {showEntradasDetalle && (
+          <>
+            <button onClick={handleCloseEntradasDetalle}>Cerrar Detalles</button>
+            <TableContainer component={Paper} style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>ID Entrada</TableCell>
+                    <TableCell>ID Producto</TableCell>
+                    <TableCell>Cantidad</TableCell>
+                    <TableCell>Precio Unitario</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredEntradasDetalle.map((entradaDetalle) => (
+                    <TableRow key={`${entradaDetalle.identrada_id}-${entradaDetalle.idproducto_id}`}>
+                      <TableCell>{entradaDetalle.identrada_id}</TableCell>
+                      <TableCell>{entradaDetalle.idproducto_id}</TableCell>
+                      <TableCell>{entradaDetalle.cantidad}</TableCell>
+                      <TableCell>{entradaDetalle.preciounitario}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        )}
+      </>
     );
   };
 
@@ -84,11 +104,13 @@ export const TablaEntradasMovimientos = () => {
       <Sidebar/>
       <NavBar/>
       <div>
-      <h2>Entradas</h2>
-      {renderEntradas()}
-      <h2>Entradas Detalles</h2>
-      {renderEntradasDetalle()}
-
+        <h2>Entradas</h2>
+        {renderEntradas()}
+        {selectedEntrada && (
+          <>
+            {renderEntradasDetalle()}
+          </>
+        )}
       </div>
     </div>
   );
