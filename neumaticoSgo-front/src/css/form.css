@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
 .container {
-    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 130vh;
     margin-left: 250px;
-    margin-top: 100px;
-    padding: 0 2rem;
     background-color: whitesmoke(210, 50, 50);
     border-radius: 4px;
     font-size: .8rem;
@@ -11,16 +14,23 @@
 .title {
     text-align: center;
     margin-bottom: 2rem;
+    color: #003084;
+    font-size: 28px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
 }
 
 .button {
-    padding: 1rem;
+    padding: 10px;
     margin-top: 10px;
     width: 100%;
     color: white;
     background-color: #003084;
     border-radius: 4px;
     border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
 }
 
 .input-control {
@@ -36,10 +46,15 @@
     font-size: .8rem;
     padding: .7rem;
     width: 100%;
+    height: 35px;
 }
 
 .input-control label {
     margin-bottom: .4rem;
+    color: #003084;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
 }
 
 .input-control input:focus {
