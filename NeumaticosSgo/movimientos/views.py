@@ -83,16 +83,16 @@ class EntradadetalleView(View):
         identrada_id = jd['identrada_id']
         idproducto_id = jd['idproducto_id']
         try:
-            entrada = Entrada.objects.get(identrada = identrada_id)
+            identrada = Entrada.objects.get(identrada = identrada_id)
         except Entrada.DoesNotExist:
-            entrada = None
-        if entrada:
+            identrada = None
+        if identrada:
             try:
                 idproducto = Producto.objects.get(idproducto=idproducto_id)
             except Producto.DoesNotExist:
                 idproducto = None
             if idproducto:
-                entrada = Entradadetalle.objects.create(identrada = identrada_id, idproducto = idproducto_id, cantidad = jd['cantidad'], preciounitario=jd['preciounitario'])
+                entrada = Entradadetalle.objects.create(identrada = identrada, idproducto = idproducto, cantidad = jd['cantidad'], preciounitario=jd['preciounitario'])
                 datos = {'mensaje': 'success'}
             else:
                 datos = {'mensaje': 'El producto no existe'}
