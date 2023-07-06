@@ -175,3 +175,6 @@ LOGIN_REDIRECT_URL = '/'
 
 # settings.py
 LOGIN_URL = '/accounts/login/'  # Reemplaza '/login/' con la URL de tu página de inicio de sesión
+
+
+
