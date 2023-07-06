@@ -74,7 +74,7 @@ export function ProveedoresForm () {
 
             <br />
 
-            <label>Razon Social</label>
+            <label>Razón Social</label>
             <input
               type='text'
               name='razon social'
@@ -83,7 +83,7 @@ export function ProveedoresForm () {
             <br />
 
             
-            <label>Direccion</label>
+            <label>Dirección</label>
             <input
               type='text'
               name='direccion'

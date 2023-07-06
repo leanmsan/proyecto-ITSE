@@ -112,6 +112,7 @@ nav .menu-items {
     font-weight: 400;
     color: var(--title-icon-color);
     transition: var(--tran-05);
+    font-family: 'Poppins', sans-serif;
 }
 
 nav.close .nav-link-item a .link-name {
@@ -127,6 +128,22 @@ nav.close .nav-link-item a .link-name {
 .logout-mod {
     padding-top: 10px;
     border-top: 1px solid #f9c4405d;
+}
+
+.logout-mod .nav-link-item .link-name {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--title-icon-color);
+    transition: var(--tran-05);
+    font-family: 'Poppins', sans-serif;
+}
+
+.logout-mod .nav-link-icon {
+    min-width: 20px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
 }
 
 .top {
