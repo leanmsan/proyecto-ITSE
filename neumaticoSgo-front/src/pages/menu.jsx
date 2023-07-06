@@ -1,5 +1,5 @@
 import '../css/menu.css'
-import { TablaProductos } from '../components/tablaproductos'
+import { TablaProductos } from '../components/TablaProductos'
 import { TablaProveedores } from '../components/TablaProveedores'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
