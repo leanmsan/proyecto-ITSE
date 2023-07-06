@@ -7,6 +7,7 @@ import { NavBar } from '../components/NavBar'
 import { DynamicForm } from '../components/DynamicForm'
 import { Sidebar } from '../components/Sidebar'
 import { ProveedoresForm } from '../components/AltaProveedores'
+import { TablaEntradasMovimientos } from '../components/TablaEntradaMovimientos'
 
 
 export function Menu() {
@@ -36,7 +37,9 @@ export function Menu() {
         <DynamicForm/>
       ): selectedTab === 'altaProveedores' ? (
         <ProveedoresForm/>
-      ): null
+      ): selectedTab === 'entradas' ? (
+        <TablaEntradasMovimientos/>
+      ):null
     }
         </div>
     )
