@@ -76,7 +76,7 @@ export function DynamicForm() {
       <Sidebar />
       <NavBar />
       <form className='form' onSubmit={handleSubmit}>
-        <h1 className='title'>Alta de producto</h1>
+        <h1 className='title'>Alta de Producto</h1>
         <div className='input-control'>
           <label>
             Nombre
@@ -88,7 +88,7 @@ export function DynamicForm() {
           </label>
           <br />
           <label>
-            Descripcion
+            Descripción
             <input
               type='text'
               value={descripcion}
@@ -142,7 +142,7 @@ export function DynamicForm() {
           </label>
           <br />
           <label>
-            Caracteristicas
+            Características
             <br />
             {Object.keys(caracteristicas).map((key) => (
               <div key={key}>
@@ -171,7 +171,7 @@ export function DynamicForm() {
 
             </div>
             <button type='button' onClick={handleAgregarCaracteristica}>
-              Agregar Caracteristica
+              Agregar Característica
             </button>
           </label>
           <br />
