@@ -32,7 +32,7 @@ export const TablaEntradasMovimientos = () => {
     };
 
     return (
-      <TableContainer component={Paper} style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}}>
+      <TableContainer component={Paper} style={{"margin-top": "10px", "margin-left": "260px", "padding": "5px"}}>
         <Table>
           <TableHead>
             <TableRow>
@@ -70,7 +70,11 @@ export const TablaEntradasMovimientos = () => {
       <>
         {showEntradasDetalle && (
           <>
-            <button onClick={handleCloseEntradasDetalle}>Cerrar Detalles</button>
+            <button onClick={handleCloseEntradasDetalle} 
+              style={{"margin-top": "20px", "margin-left": "260px", "padding": "5px", "width": "15%",
+              "color": "white", "background-color": "#003084", "border-radius": "4px", "border": "none",
+              "font-size": "16px",  "font-weight": "bold"}}>Cerrar Detalles
+            </button>
             <TableContainer component={Paper} style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}}>
               <Table>
                 <TableHead>
@@ -104,7 +108,9 @@ export const TablaEntradasMovimientos = () => {
       <Sidebar/>
       <NavBar/>
       <div>
-        <h2>Entradas</h2>
+        <h2 style={{"margin-top": "100px", "margin-left": "260px", "margin-bottom": "0px", "padding": "5px",
+              "color": "#003084", "border": "none", "font-size": "24px", "font-weight": "bold"}}>Entradas
+        </h2>
         {renderEntradas()}
         {selectedEntrada && (
           <>
