@@ -7,6 +7,7 @@ import { ProovedoresPage } from './pages/ProveedoresPage';
 import {Login} from './components/login';
 import { ProveedoresForm } from './components/AltaProveedores';
 import { TablaEntradasMovimientos } from './components/TablaEntradaMovimientos';
+import {Inicio} from './components/Inicio'
 
 function ProtectedRoute({ element: Component, authenticated, ...rest }) {
   return authenticated ? <Component {...rest} /> : <Navigate to="/" replace={true} />;
@@ -29,6 +30,15 @@ function App(){
             element={
               <ProtectedRoute
                 element={Menu }
+                authenticated={authenticated}
+              />
+            }
+          />
+          <Route
+            path="/inicio"
+            element={
+              <ProtectedRoute
+                element={Inicio }
                 authenticated={authenticated}
               />
             }
