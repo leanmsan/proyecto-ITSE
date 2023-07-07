@@ -1,34 +1,35 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { useState } from 'react';
-import {DynamicForm} from './components/DynamicForm';
+import { DynamicForm } from './components/DynamicForm';
 import { Menu } from './pages/menu';
 import { ProductosPage } from './pages/productosPage';
 import { ProovedoresPage } from './pages/ProveedoresPage';
-import {Login} from './components/login';
+import { Login } from './components/login';
 import { ProveedoresForm } from './components/altaProveedores';
 import { TablaEntradasMovimientos } from './components/TablaEntradaMovimientos';
+import { RegistroEntradasForm } from './components/EntradasForm';
 
 function ProtectedRoute({ element: Component, authenticated, ...rest }) {
   return authenticated ? <Component {...rest} /> : <Navigate to="/" replace={true} />;
 }
-function App(){
-  
+function App() {
+
   const [authenticated, setAuthenticated] = useState(false);
 
   const handleAuthentication = (status) => {
     setAuthenticated(status);
   };
 
-  return (  
+  return (
     <div className='app'>
       <BrowserRouter basename="/">
-      <Routes>
-        <Route path='/' element={<Login handleAuthentication={handleAuthentication} />}  />
-        <Route
+        <Routes>
+          <Route path='/' element={<Login handleAuthentication={handleAuthentication} />} />
+          <Route
             path="/Menu"
             element={
               <ProtectedRoute
-                element={Menu }
+                element={Menu}
                 authenticated={authenticated}
               />
             }
@@ -37,7 +38,7 @@ function App(){
             path="/productos"
             element={
               <ProtectedRoute
-                element={ProductosPage }
+                element={ProductosPage}
                 authenticated={authenticated}
               />
             }
@@ -80,10 +81,20 @@ function App(){
             }
           />
 
-      </Routes>
+          <Route
+            path="/registroentradas"
+            element={
+              <ProtectedRoute
+                element={RegistroEntradasForm}
+                authenticated={authenticated}
+              />
+            }
+          />
+
+        </Routes>
       </BrowserRouter>
     </div>
-     
+
   )
 }
 
