@@ -52,6 +52,13 @@ export function Sidebar({handleTabClick, selectedTab}) {
                             </Link>
                         </li>
                         <li className={`nav-link-item ${selectedTab === 'movimientos' ? 'active' : ''}`}>
+                            <Link to="/registroentradas" 
+                            >
+                                <i className="fa-solid fa-cash-register nav-link-icon"></i>
+                                <span className="link-name">Registro Entradas</span>
+                            </Link>
+                        </li>
+                        <li className={`nav-link-item ${selectedTab === 'movimientos' ? 'active' : ''}`}>
                             <Link to="/salidas" 
                             >
                                 <i className="fa-solid fa-cash-register nav-link-icon"></i>

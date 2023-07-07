@@ -9,6 +9,7 @@ import { Sidebar } from '../components/Sidebar'
 import { ProveedoresForm } from '../components/altaProveedores'
 import { TablaEntradasMovimientos } from '../components/TablaEntradaMovimientos'
 import { TablaSalidasMovimientos } from '../components/TablaSalidaMovimiento'
+import { RegistroEntradasForm } from '../components/EntradasForm'
 
 
 export function Menu() {
@@ -40,9 +41,14 @@ export function Menu() {
         <ProveedoresForm/>
       ): selectedTab === 'entradas' ? (
         <TablaEntradasMovimientos/>
-      ):selectedTab === 'salidas' ? (
+      ):
+        selectedTab === 'registroentradas' ? (
+        <RegistroEntradasForm/>
+      ):
+        selectedTab === 'salidas' ? (
         <TablaSalidasMovimientos/>
       ): null
+
     }
         </div>
     )
