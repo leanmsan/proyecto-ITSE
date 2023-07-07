@@ -1,23 +1,25 @@
 import '../css/menu.css'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export function NavBar({ productos, setProductosFiltrados }) {
+export function NavBar() {
 
     const [busqueda, setBusqueda] = useState([]);
+    const [productos, setProductos] = useState([]);
 
-    const handleSearch = (event) => {
+    const handleChange = (event) => {
         const searchTerm = event.target.value;
-        console.log(event.target.value)
+        console.log(event.target.value);
         setBusqueda(searchTerm);
+        filtrar(event.target.value);
   }
 
 const filtrar = (terminoBusqueda) => {
-    var resultadosBusqueda = productos.filter((elemento) => {
+    let resultadosBusqueda = productos.filter((elemento) => {
         if(elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())){
             return elemento;
         }
     })
-    setData(resultadosBusqueda);
+    setProductos(resultadosBusqueda);
 }
 
     return (
@@ -31,7 +33,7 @@ const filtrar = (terminoBusqueda) => {
                         type="text" 
                         placeholder="Buscar productos"
                         value={busqueda}
-                        onChange={handleSearch}
+                        onChange={handleChange}
                     />
                 </div>
             </div>
