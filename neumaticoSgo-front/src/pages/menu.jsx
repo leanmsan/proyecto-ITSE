@@ -8,6 +8,7 @@ import { DynamicForm } from '../components/DynamicForm'
 import { Sidebar } from '../components/Sidebar'
 import { ProveedoresForm } from '../components/altaProveedores'
 import { TablaEntradasMovimientos } from '../components/TablaEntradaMovimientos'
+import { TablaSalidasMovimientos } from '../components/TablaSalidaMovimiento'
 import { RegistroEntradasForm } from '../components/EntradasForm'
 
 
@@ -43,7 +44,11 @@ export function Menu() {
       ):
         selectedTab === 'registroentradas' ? (
         <RegistroEntradasForm/>
-      ):null
+      ):
+        selectedTab === 'salidas' ? (
+        <TablaSalidasMovimientos/>
+      ): null
+
     }
         </div>
     )

@@ -7,6 +7,7 @@ import { ProovedoresPage } from './pages/ProveedoresPage';
 import { Login } from './components/login';
 import { ProveedoresForm } from './components/altaProveedores';
 import { TablaEntradasMovimientos } from './components/TablaEntradaMovimientos';
+import { TablaSalidasMovimientos } from './components/TablaSalidaMovimiento';
 import { RegistroEntradasForm } from './components/EntradasForm';
 
 function ProtectedRoute({ element: Component, authenticated, ...rest }) {
@@ -72,6 +73,18 @@ function App() {
           />
 
           <Route
+            path="/salidas"
+            element={
+              <ProtectedRoute
+                element={TablaSalidasMovimientos}
+                authenticated={authenticated}
+              />
+            }
+
+            
+          />
+
+          <Route
             path="/entradas"
             element={
               <ProtectedRoute
@@ -79,6 +92,8 @@ function App() {
                 authenticated={authenticated}
               />
             }
+
+            
           />
 
           <Route
