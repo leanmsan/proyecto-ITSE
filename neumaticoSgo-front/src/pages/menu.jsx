@@ -1,12 +1,12 @@
 import '../css/menu.css'
-import { TablaProductos } from '../components/TablaProductos'
+import { TablaProductos } from '../components/tablaproductos'
 import { TablaProveedores } from '../components/TablaProveedores'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { NavBar } from '../components/NavBar'
 import { DynamicForm } from '../components/DynamicForm'
 import { Sidebar } from '../components/Sidebar'
-import { ProveedoresForm } from '../components/AltaProveedores'
+import { ProveedoresForm } from '../components/altaProveedores'
 import { TablaEntradasMovimientos } from '../components/TablaEntradaMovimientos'
 
 

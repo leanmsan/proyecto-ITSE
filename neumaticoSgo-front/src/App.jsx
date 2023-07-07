@@ -5,7 +5,7 @@ import { Menu } from './pages/menu';
 import { ProductosPage } from './pages/productosPage';
 import { ProovedoresPage } from './pages/ProveedoresPage';
 import {Login} from './components/login';
-import { ProveedoresForm } from './components/AltaProveedores';
+import { ProveedoresForm } from './components/altaProveedores';
 import { TablaEntradasMovimientos } from './components/TablaEntradaMovimientos';
 
 function ProtectedRoute({ element: Component, authenticated, ...rest }) {
