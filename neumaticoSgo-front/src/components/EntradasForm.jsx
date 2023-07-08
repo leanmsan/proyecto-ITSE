@@ -1,5 +1,5 @@
-//import React from "react";
-import { useState } from "react";
+
+import React, { useState, useEffect } from 'react';
 import "../css/form.css"
 import { Sidebar } from "./Sidebar";
 import { NavBar } from "./NavBar";
@@ -11,9 +11,9 @@ export function RegistroEntradasForm() {
     const [idproveedor_id, setIdProveedor] = useState("")
     const [fecha, setFecha] = useState("")
     const [montototal, setMontoTotal] = useState("")
-
+    const [proveedores, setProveedores] = useState([]);
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        
 
         const entrada = {
             idproveedor_id,
@@ -40,7 +40,29 @@ export function RegistroEntradasForm() {
             console.log('error de red', error)
 
         }
+
     }
+
+    useEffect(() => {
+        const fetchProveedores = async () => {
+            try {
+                // Obtener la lista de proveedores
+                const response = await fetch('http://127.0.0.1:8000/api/proveedores/');
+                const data = await response.json();
+
+                if (response.ok) {
+                    setProveedores(data.proveedores);
+                } else {
+                    console.log('error al obtener los proveedores');
+                }
+            } catch (error) {
+                console.log('error de red', error);
+            }
+        };
+
+        fetchProveedores();
+    }, []);
+
     return (
         <div className='container'>
             <Sidebar />
@@ -49,12 +71,21 @@ export function RegistroEntradasForm() {
                 <h1 className='title' >Registro de Entrada</h1>
                 <div className='input-control'
                 >
-                    <label>Id de Proveedor</label>
-                    <input
-                        type='number'
-                        name='id-proveedor'
-                        onChange={(e) => setIdProveedor(e.target.value)}
-                    />
+                    <div className='input-control'>
+                        <label>Proveedor</label>
+                        <select
+                            name='proveedor'
+                            value={idproveedor_id}
+                            onChange={(e) => setIdProveedor(e.target.value)}
+                        >
+                            <option value=''>Seleccione un proveedor</option>
+                            {proveedores.map((proveedor) => (
+                                <option key={proveedor.idproveedor} value={proveedor.idproveedor}>
+                                    {proveedor.nombre}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                     <br />
                     <label>Fecha</label>
                     <input
@@ -74,7 +105,7 @@ export function RegistroEntradasForm() {
                 </div>
                 <button className='button' type="submit">Enviar</button>
             </form>
-            <RegistroEntradaDetalleForm/>
+            <RegistroEntradaDetalleForm />
         </div>
     )
 }

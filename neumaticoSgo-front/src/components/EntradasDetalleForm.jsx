@@ -1,89 +1,136 @@
-//import React from "react";
-import { useState } from "react";
-import "../css/form.css"
-import { Sidebar } from "./Sidebar";
-import { NavBar } from "./NavBar";
-import { useNavigate } from "react-router-dom";
+
+import React, { useState, useEffect } from 'react';
+import '../css/form.css';
+import { Sidebar } from './Sidebar';
+import { NavBar } from './NavBar';
+import { useNavigate } from 'react-router-dom';
 
 export function RegistroEntradaDetalleForm() {
-    const navegate = useNavigate()
-    const [identrada_id, setIdEntrada] = useState("")
-    const [idproducto_id, setIdProducto] = useState("")
-    const [cantidad, setCantidad] = useState("")
-    const [preciounitario, setPrecioUnitario] = useState("")
+  const navigate = useNavigate();
+  const [identrada_id, setIdEntrada] = useState('');
+  const [idproducto_id, setIdProducto] = useState('');
+  const [cantidad, setCantidad] = useState('');
+  const [preciounitario, setPrecioUnitario] = useState('');
+  const [productos, setProductos] = useState([]);
+  const [lastInsertedId, setLastInsertedId] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/productos/');
+        const data = await response.json();
 
-        const entradaDetalle = {
-            identrada_id,
-            idproducto_id,
-            cantidad,
-            preciounitario,
-        };
-
-        try {
-            const response = await fetch('http://127.0.0.1:8000/api/entrada_detalles/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(entradaDetalle)
-            })
-            if (response.ok) {
-                console.log(response, "esto es response")
-                console.log('entrada creada exitosamente')
-                navegate('/entradas')
-            } else {
-                console.log('error al crear la entrada')
-            }
-        } catch (error) {
-            console.log('error de red', error)
-
+        if (response.ok) {
+          setProductos(data.productos);
+        } else {
+          console.log('error al obtener los productos');
         }
+      } catch (error) {
+        console.log('error de red', error);
+      }
+    };
+
+    fetchProductos();
+  }, []);
+
+  useEffect(() => {
+    const fetchLastInsertedId = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/entradas/');
+        const data = await response.json();
+        console.log('Esto es response', response)
+        console.log('Esto es data', data)
+        if (response.ok && data.entradas.length > 0) {
+          const lastId = data.entradas[data.entradas.length - 1].identrada;
+          console.log('Esto es lastid', lastId)
+          setLastInsertedId(lastId);
+          setIdEntrada(lastId);
+        } else {
+          console.log('error al obtener el último id de entrada');
+        }
+      } catch (error) {
+        console.log('error de red', error);
+      }
+    };
+
+    fetchLastInsertedId();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const entradaDetalle = {
+      identrada_id,
+      idproducto_id,
+      cantidad,
+      preciounitario,
+    };
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/entrada_detalles/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(entradaDetalle),
+      });
+
+      if (response.ok) {
+        console.log('detalle de entrada creado exitosamente');
+        navigate('/entradas');
+      } else {
+        console.log('error al crear el detalle de entrada');
+      }
+    } catch (error) {
+      console.log('error de red', error);
     }
-    return (
-        <div className='container'>
-            <Sidebar />
-            <NavBar />
-            <form className='form' onSubmit={handleSubmit}>
-                <h1 className='title' >Registro de Detalle de Entrada</h1>
-                <div className='input-control'
-                >
-                    <label>Id de Entrada</label>
-                    <input
-                        type='number'
-                        name='id-entrada'
-                        onChange={(e) => setIdEntrada(e.target.value)}
-                    />
-                    <br />
-                    <label>Id de Producto</label>
-                    <input
-                        type='number'
-                        name='id-producto'
-                        onChange={(e) => setIdProducto(e.target.value)}
-                    />
+  };
 
-                    <br />
-
-                    <label>Cantidad</label>
-                    <input
-                        type='number'
-                        name='cantidad'
-                        onChange={(e) => setCantidad(e.target.value)}
-                    />
-
-                    <br />
-
-                    <label>Precio Unitario</label>
-                    <input
-                        type='text'
-                        name='precio-unitario'
-                        onChange={(e) => setPrecioUnitario(e.target.value)}
-                    />
-                </div>
-                <button className='button' type="submit">Enviar</button>
-            </form>
+  return (
+    <div className='container'>
+      <Sidebar />
+      <NavBar />
+      <form className='form' onSubmit={handleSubmit}>
+        <h1 className='title'>Registro de Detalle de Entrada</h1>
+        <div className='input-control'>
+          <input
+            type='hidden'
+            name='last-inserted-id'
+            value={lastInsertedId}
+          />
+          <br />
+          <label>Producto</label>
+          <select
+            name='producto'
+            value={idproducto_id}
+            onChange={(e) => setIdProducto(e.target.value)}
+          >
+            <option value=''>Seleccione un producto</option>
+            {productos.map((producto) => (
+              <option key={producto.idproducto} value={producto.idproducto}>
+                {producto.nombre}
+              </option>
+            ))}
+          </select>
+          <br />
+          <label>Cantidad</label>
+          <input
+            type='number'
+            name='cantidad'
+            onChange={(e) => setCantidad(e.target.value)}
+          />
+          <br />
+          <label>Precio Unitario</label>
+          <input
+            type='text'
+            name='precio-unitario'
+            onChange={(e) => setPrecioUnitario(e.target.value)}
+          />
         </div>
-    )
+        <button className='button' type='submit'>
+          Enviar
+        </button>
+      </form>
+    </div>
+  );
 }
