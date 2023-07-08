@@ -4,9 +4,24 @@ import axios from 'axios';
 
 export const TablaProductos = () => {
   const [productos, setData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [tablaProductos, setTablaProductos] = useState([]);
+  const [busqueda, setBusqueda]= useState("");
 
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    setBusqueda(event.target.value);
+    filtrar(event.target.value);
+  }
 
+const filtrar = (terminoBusqueda) => {
+let resultadosBusqueda = tablaProductos.filter((elemento) => {
+    if(elemento.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())){
+        return elemento;
+    }
+})
+setData(resultadosBusqueda);
+}
+  
   useEffect(() => {
     fetchData();
   }, []);
@@ -15,6 +30,7 @@ export const TablaProductos = () => {
     try {
       const response = await axios.get(`http://127.0.0.1:8000/api/productos/?search=${searchTerm}`);
       setData(response.data.productos);
+      setTablaProductos(response.data.productos)
       console.log(response.data.productos);
     } catch (error) {
       console.error('Error al obtener los datos:', error);
@@ -25,8 +41,8 @@ export const TablaProductos = () => {
   return (
     <div>
       <div className='barra-busqueda'>
-      <input type="text" placeholder="Buscar productos..." value={searchTerm} 
-        onChange={(e) => setSearchTerm(e.target.value)}
+      <input type="text" placeholder="Buscar productos..." value={busqueda} 
+        onChange={handleChange}
       />
       </div>
       <TableContainer style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
