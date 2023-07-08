@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
 import axios from 'axios';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faSearch} from '@fortawesome/free-solid-svg-icons'
-
-//Instalar!! npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
 
 export const TablaProductos = () => {
   const [productos, setData] = useState([]);
@@ -44,14 +40,12 @@ setData(resultadosBusqueda);
 
   return (
     <div>
-      <div className='barra-busqueda'>
+      <div className='search-box'>
+      <button class="btn-search"><i class="fas fa-search"></i></button>
         <input 
-          className='input-buscar' type="text" placeholder="Buscar productos..." 
+          className='input-search' type="text" placeholder="Buscar..." 
           value={busqueda} onChange={handleChange}
         />
-        <button className='btn btn-success'>
-          <FontAwesomeIcon icon = {faSearch}/>
-        </button>
       </div>
       <TableContainer style={{"margin-top": "10px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
       <Table>

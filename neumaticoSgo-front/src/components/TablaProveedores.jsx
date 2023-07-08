@@ -43,14 +43,12 @@ export const TablaProveedores = () => {
 
   return (
     <div>
-      <div className='barra-busqueda'>
-      <input 
-          className='input-buscar' type="text" placeholder="Buscar productos..." 
+      <div className='search-box'>
+      <button class="btn-search"><i class="fas fa-search"></i></button>
+        <input 
+          className='input-search' type="text" placeholder="Buscar..." 
           value={busqueda} onChange={handleChange}
         />
-        <button className='btn btn-success'>
-          <FontAwesomeIcon icon = {faSearch}/>
-        </button>
       </div>
       <TableContainer style={{"margin-top": "10px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
       <Table>
