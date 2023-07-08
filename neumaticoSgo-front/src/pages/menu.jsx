@@ -10,6 +10,7 @@ import { ProveedoresForm } from '../components/altaProveedores'
 import { TablaEntradasMovimientos } from '../components/TablaEntradaMovimientos'
 import { TablaSalidasMovimientos } from '../components/TablaSalidaMovimiento'
 import { RegistroEntradasForm } from '../components/EntradasForm'
+import { RegistroSalidasForm } from '../components/SalidasForm'
 
 
 export function Menu() {
@@ -47,6 +48,9 @@ export function Menu() {
       ):
         selectedTab === 'salidas' ? (
         <TablaSalidasMovimientos/>
+      ):
+      selectedTab === 'registrosalidas' ? (
+        <RegistroSalidasForm/>
       ): null
 
     }

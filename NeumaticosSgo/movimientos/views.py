@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from common.models import (
     Entrada,
@@ -7,6 +8,7 @@ from common.models import (
     Proveedor,
     Producto,
 )
+
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
@@ -14,10 +16,8 @@ from django.utils.decorators import method_decorator
 import json
 from datetime import datetime
 
-# Create your views here.
 
 # VISTA DE ENTRADA
-
 
 @method_decorator(csrf_exempt, name="dispatch")
 class EntradaView(View):
@@ -48,20 +48,27 @@ class EntradaView(View):
 
     def post(self, request):
         jd = json.loads(request.body)
-        idproveedor_id = jd['idproveedor_id']
-        
+        idproveedor_id = jd["idproveedor_id"]
+
         try:
             idproveedor = Proveedor.objects.get(idproveedor=idproveedor_id)
         except Proveedor.DoesNotExist:
             idproveedor = None
 
         if idproveedor:
-            entrada = Entrada.objects.create(idproveedor=idproveedor, fecha=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), montototal=jd['montototal'])
+            entrada = Entrada.objects.create(
+                idproveedor=idproveedor,
+                fecha=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                montototal=jd["montototal"],
+            )
             last_inserted_id = entrada.identrada  # Obtener el último ID insertado
 
-            datos = {'mensaje': 'success', 'last_inserted_id': last_inserted_id}  # Enviar el último ID insertado en la respuesta
+            datos = {
+                "mensaje": "success",
+                "last_inserted_id": last_inserted_id,
+            }  # Enviar el último ID insertado en la respuesta
         else:
-            datos = {'mensaje': 'El proveedor no existe'}
+            datos = {"mensaje": "El proveedor no existe"}
 
         return JsonResponse(datos)
 
@@ -70,7 +77,6 @@ class EntradaView(View):
 
 
 # VISTA DE ENTRADA DETALLE
-
 
 @method_decorator(csrf_exempt, name="dispatch")
 class EntradadetalleView(View):
@@ -104,18 +110,18 @@ class EntradadetalleView(View):
         jd = json.loads(request.body)
         identrada_id = jd["identrada_id"]
         idproducto_id = jd["idproducto_id"]
-        
+
         try:
             identrada = Entrada.objects.get(identrada=int(identrada_id))
         except Entrada.DoesNotExist:
             identrada = None
-        
+
         if identrada:
             try:
                 idproducto = Producto.objects.get(idproducto=idproducto_id)
             except Producto.DoesNotExist:
                 idproducto = None
-            
+
             if idproducto:
                 entrada = Entradadetalle.objects.create(
                     identrada=identrada,
@@ -174,12 +180,17 @@ class SalidaView(View):
             idproveedor = None
 
         if idproveedor:
-            salida = Salida.objects.create(
+            entrada = Entrada.objects.create(
                 idproveedor=idproveedor,
                 fecha=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 montototal=jd["montototal"],
             )
-            datos = {"mensaje": "success"}
+            last_inserted_id = entrada.identrada  # Obtener el último ID insertado
+
+            datos = {
+                "mensaje": "success",
+                "last_inserted_id": last_inserted_id,
+            }  # Enviar el último ID insertado en la respuesta
         else:
             datos = {"mensaje": "El proveedor no existe"}
 
@@ -220,35 +231,6 @@ class SalidadetalleView(View):
 
         return JsonResponse(datos)
 
-    """
-
-    def post(self, request):
-        jd = json.loads(request.body)
-        idsalida_id = jd['idsalida_id']
-        idproducto_id = jd['idproducto_id']
-        try:
-            idsalida = Salida.objects.get(idsalida=idsalida_id)
-        except Salida.DoesNotExist:
-            idsalida = None
-        
-        if idsalida:
-            try:
-                idproducto = Producto.objects.get(idproducto=idproducto_id)
-            except Producto.DoesNotExist:
-                idproducto = None
-            
-            if idproducto:
-                salidadetalle = Salidadetalle.objects.create(idsalida=idsalida, idproducto=idproducto, cantidad=jd['cantidad'], preciounitario=jd['preciounitario'])
-                datos = {'mensaje': 'success'}
-            else:
-                datos = {'mensaje': 'El producto no existe'}
-        else:
-            datos = {'mensaje': 'La salida no existe'}
-        
-        return JsonResponse(datos)
-    
-    """
-
     def post(self, request):
         jd = json.loads(request.body)
         idsalida_id = jd["idsalida_id"]
@@ -274,8 +256,6 @@ class SalidadetalleView(View):
                         cantidad=cantidad,
                         preciounitario=jd["preciounitario"],
                     )
-                    producto.stockdisponible -= cantidad
-                    producto.save()
                     datos = {"mensaje": "success"}
                 else:
                     datos = {
@@ -285,7 +265,6 @@ class SalidadetalleView(View):
                 datos = {"mensaje": "El producto no existe"}
         else:
             datos = {"mensaje": "La salida no existe"}
-
         return JsonResponse(datos)
 
     def put(self, request, id):
