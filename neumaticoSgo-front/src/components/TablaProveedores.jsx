@@ -4,24 +4,47 @@ import axios from 'axios';
 
 export const TablaProveedores = () => {
   const [proveedores, setData] = useState([]);
+  const [tablaProveedores, setTablaProveedores] = useState([]);
+  const [busqueda, setBusqueda]= useState("");
+
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    setBusqueda(event.target.value);
+    filtrar(event.target.value);
+  }
+
+  const filtrar = (terminoBusqueda) => {
+    let resultadosBusqueda = tablaProveedores.filter((elemento) => {
+      if(elemento.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())){
+        return elemento;
+      }
+    })
+    setData(resultadosBusqueda);
+  }
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
+  const fetchData = async (searchTerm = '') => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/proveedores/'); // Reemplaza 'URL_DE_TU_API' con la URL real de tu API
+      const response = await axios.get(`http://127.0.0.1:8000/api/proveedores/?search=${searchTerm}`);
       setData(response.data.proveedores);
-      console.log(response.data.proveedores)
+      setTablaProveedores(response.data.proveedores)
+      console.log(response.data.proveedores);
     } catch (error) {
       console.error('Error al obtener los datos:', error);
     }
   };
 
   return (
-
-    <TableContainer style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
+    <div>
+      <div className='barra-busqueda'>
+      <input type="text" placeholder="Buscar proveedores..." value={busqueda} 
+        onChange={handleChange}
+      />
+      </div>
+      <TableContainer style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
@@ -51,5 +74,6 @@ export const TablaProveedores = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
   );
 };
