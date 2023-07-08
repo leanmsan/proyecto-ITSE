@@ -188,7 +188,7 @@ nav.close ~ .top {
 .search-box {
     width: 400px;
     margin-top: 80px;
-    margin-left: 280px;
+    margin-left: 550px;
     margin-bottom: 50px;
     padding-bottom: 25px;
     font-size: 16px;
@@ -225,7 +225,7 @@ nav.close ~ .top {
     cursor: pointer;
     border-radius: 50%;
     position: absolute;
-    left: 280px;
+    left: 550px;
     color:#003084 ;
     pointer-events: painted;  
 }
