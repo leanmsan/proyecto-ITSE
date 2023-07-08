@@ -4,23 +4,32 @@ import axios from 'axios';
 
 export const TablaProductos = () => {
   const [productos, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
+  const fetchData = async (searchTerm = '') => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/productos/'); // Reemplaza 'URL_DE_TU_API' con la URL real de tu API
+      const response = await axios.get(`http://127.0.0.1:8000/api/productos/?search=${searchTerm}`);
       setData(response.data.productos);
-      console.log(response.data.productos)
+      console.log(response.data.productos);
     } catch (error) {
       console.error('Error al obtener los datos:', error);
     }
   };
+  
 
   return (
-    <TableContainer style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
+    <div>
+      <div className='barra-busqueda'>
+      <input type="text" placeholder="Buscar productos..." value={searchTerm} 
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      </div>
+      <TableContainer style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
@@ -46,5 +55,7 @@ export const TablaProductos = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
+    
   );
 };

@@ -221,3 +221,7 @@ nav.close ~ .top {
     transform: translateY(-50%);
     color: var(--secondary-color);
 }
+
+.barra-busqueda {
+    margin-top: 200px;
+}
