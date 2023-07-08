@@ -223,6 +223,14 @@ nav.close ~ .top {
 }
 
 .barra-busqueda {
-    margin-top: 200px;
-    margin-left: 300px;
+    margin-top: 100px;
+    margin-left: 280px;
+    padding-bottom: 25px;
+    font-size: 16px;
+    color: #003084;
 }
+
+.barra-busqueda .input-buscar {
+    font-size: 14px;
+}
+
