@@ -4,9 +4,9 @@ import "../css/form.css"
 import { Sidebar } from "./Sidebar";
 import { NavBar } from "./NavBar";
 import { useNavigate } from "react-router-dom";
-import { RegistroEntradaDetalleForm } from "./EntradaDetalleForm";
+import { RegistroSalidaDetalleForm } from "./SalidaDetalleForm";
 
-export function RegistroEntradasForm() {
+export function RegistroSalidasForm() {
     const navegate = useNavigate()
     const [idproveedor_id, setIdProveedor] = useState("")
     const [fecha, setFecha] = useState("")
@@ -15,26 +15,26 @@ export function RegistroEntradasForm() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const entrada = {
+        const salida = {
             idproveedor_id,
             fecha,
             montototal,
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/entradas/', {
+            const response = await fetch('http://127.0.0.1:8000/api/salidas/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(entrada)
+                body: JSON.stringify(salida)
             })
             if (response.ok) {
                 console.log(response, "esto es response")
-                console.log('entrada creada exitosamente')
-                navegate('/registroentradas')
+                console.log('salida creada exitosamente')
+                navegate('/registrosalidas')
             } else {
-                console.log('error al crear la entrada')
+                console.log('error al crear la salida')
             }
         } catch (error) {
             console.log('error de red', error)
@@ -74,7 +74,9 @@ export function RegistroEntradasForm() {
                 </div>
                 <button className='button' type="submit">Enviar</button>
             </form>
-            <RegistroEntradaDetalleForm/>
+            <div>
+                <RegistroSalidaDetalleForm/>
+            </div>
         </div>
     )
 }
