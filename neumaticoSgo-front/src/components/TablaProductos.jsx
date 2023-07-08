@@ -40,12 +40,14 @@ setData(resultadosBusqueda);
 
   return (
     <div>
-      <div className='barra-busqueda'>
-      <input type="text" placeholder="Buscar productos..." value={busqueda} 
-        onChange={handleChange}
-      />
+      <div className='search-box'>
+      <button class="btn-search"><i class="fas fa-search"></i></button>
+        <input 
+          className='input-search' type="text" placeholder="Buscar..." 
+          value={busqueda} onChange={handleChange}
+        />
       </div>
-      <TableContainer style={{"margin-top": "80px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
+      <TableContainer style={{"margin-top": "10px", "margin-left": "260px", "padding": "5px"}} component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
