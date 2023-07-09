@@ -1,13 +1,17 @@
 import React from 'react';
+import { Sidebar } from './Sidebar';
+import { NavBar } from './NavBar';
 
-const PortadaStock = () => {
+export const Inicio = () => {
   return (
-    <div className="portada">
-      <h1>Sistema de Stock</h1>
-      <p>Bienvenido al sistema de gestión de stock.</p>
-      <img src="ruta-a-tu-imagen.jpg" alt="Portada" />
+    <div>
+      <NavBar/>
+      <Sidebar/>
+      <div className="home">
+        <h1>Sistema de Stock</h1>
+        <p>Bienvenido al sistema de gestión de stock.</p>
+        <img src="ruta-a-tu-imagen.jpg" alt="Home" />
+      </div>
     </div>
   );
 };
-
-export default PortadaStock;
