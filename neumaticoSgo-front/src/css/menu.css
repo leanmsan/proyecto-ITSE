@@ -185,6 +185,24 @@ nav.close ~ .top {
     }
 }
 
+.home {
+    margin-left: 300px;
+    margin-top: 70px;
+}
+
+.home .title, .home .subtitle {
+    font-family: 'Poppins', sans-serif;
+}
+
+.home .title {
+    font-size: 30px;
+}
+
+.home .subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
 .search-box {
     width: 400px;
     margin-top: 80px;
