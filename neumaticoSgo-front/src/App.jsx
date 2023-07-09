@@ -16,7 +16,9 @@ function ProtectedRoute({ element: Component, authenticated, ...rest }) {
 }
 function App() {
 
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(
+    localStorage.getItem('authenticated') === 'true' // Recuperar el estado de autenticación desde localStorage
+  );
 
   const handleAuthentication = (status) => {
     setAuthenticated(status);
