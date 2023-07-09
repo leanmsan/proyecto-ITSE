@@ -236,6 +236,7 @@ class SalidadetalleView(View):
         idsalida_id = jd["idsalida_id"]
         idproducto_id = jd["idproducto_id"]
         cantidad = jd["cantidad"]
+        cantidad = int(cantidad)
 
         try:
             salida = Salida.objects.get(idsalida=idsalida_id)

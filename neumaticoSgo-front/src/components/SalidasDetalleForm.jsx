@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 export function RegistroSalidaDetalleForm() {
     const navigate = useNavigate();
-    const [idsalida_id, setIdSalida] = useState(0);
-    const [idproducto_id, setIdProducto] = useState(0);
-    const [cantidad, setCantidad] = useState(0);
-    const [preciounitario, setPrecioUnitario] = useState(0);
+    const [idsalida_id, setIdSalida] = useState("");
+    const [idproducto_id, setIdProducto] = useState("");
+    const [cantidad, setCantidad] = useState("");
+    const [preciounitario, setPrecioUnitario] = useState("");
     const [productos, setProductos] = useState([]);
     const [lastInsertedId, setLastInsertedId] = useState('');
 
