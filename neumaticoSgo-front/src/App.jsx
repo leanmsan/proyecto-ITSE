@@ -17,7 +17,9 @@ function ProtectedRoute({ element: Component, authenticated, ...rest }) {
 }
 function App() {
 
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(
+    localStorage.getItem('authenticated') === 'true' // Recuperar el estado de autenticación desde localStorage
+  );
 
   const handleAuthentication = (status) => {
     setAuthenticated(status);
@@ -112,6 +114,16 @@ function App() {
             element={
               <ProtectedRoute
                 element={RegistroEntradasForm}
+                authenticated={authenticated}
+              />
+            }
+          />
+
+          <Route
+            path="/registrosalidas"
+            element={
+              <ProtectedRoute
+                element={RegistroSalidasForm}
                 authenticated={authenticated}
               />
             }

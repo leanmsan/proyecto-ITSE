@@ -51,6 +51,9 @@ export function Menu() {
       ):
         selectedTab === 'salidas' ? (
         <TablaSalidasMovimientos/>
+      ):
+      selectedTab === 'registrosalidas' ? (
+        <RegistroSalidasForm/>
       ): null
 
     }

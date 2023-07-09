@@ -33,6 +33,8 @@ export function Login({handleAuthentication }) {
     if (response.ok) {
       console.log('Inicio de Sesion Exitoso')
       handleAuthentication(true)
+      localStorage.setItem('authenticated', 'true');
+      console.log(localStorage.setItem)
       navegate('/Menu')
     } else {
       setError(true)
