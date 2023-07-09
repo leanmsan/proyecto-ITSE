@@ -11,6 +11,7 @@ import { TablaEntradasMovimientos } from '../components/TablaEntradaMovimientos'
 import { TablaSalidasMovimientos } from '../components/TablaSalidaMovimiento'
 import { RegistroEntradasForm } from '../components/EntradasForm'
 import { RegistroSalidasForm } from '../components/SalidasForm'
+import {Inicio} from '../components/Inicio'
 
 
 export function Menu() {
@@ -32,7 +33,9 @@ export function Menu() {
         <div>
             <Sidebar handleTabClick = {handleTabClick} selectedTab = {selectedTab}/>
             <NavBar/>
-            {selectedTab === 'productos' ? (
+        {selectedTab === 'inicio' ? (
+        <Inicio />
+      ) : selectedTab === 'productos' ? (
         <TablaProductos />
       ) : selectedTab === 'proveedores' ? (
         <TablaProveedores/>

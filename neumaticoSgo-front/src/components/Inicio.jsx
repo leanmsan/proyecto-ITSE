@@ -1,13 +1,18 @@
 import React from 'react';
+import { Sidebar } from './Sidebar';
+import { NavBar } from './NavBar';
+import Goodyear from '../img/Goodyear.png'
 
-const PortadaStock = () => {
+export const Inicio = () => {
   return (
-    <div className="portada">
-      <h1>Sistema de Stock</h1>
-      <p>Bienvenido al sistema de gestión de stock.</p>
-      <img src="ruta-a-tu-imagen.jpg" alt="Portada" />
+    <div>
+      <NavBar/>
+      <Sidebar/>
+      <div className="home">
+        <h1 className='title'>Sistema de Stock de Neumáticos Santiago</h1>
+        <p className='subtitle'>Bienvenido al sistema de gestión de stock y movimientos.</p>
+        <img src={Goodyear} alt="Home"/>
+      </div>
     </div>
   );
 };
-
-export default PortadaStock;
