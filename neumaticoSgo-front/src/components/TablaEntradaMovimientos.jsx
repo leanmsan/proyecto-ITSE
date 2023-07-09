@@ -64,6 +64,7 @@ export const TablaEntradasMovimientos = () => {
 
     const handleCloseEntradasDetalle = () => {
       setShowEntradasDetalle(false);
+      setSelectedEntrada(null);
     };
 
     return (
