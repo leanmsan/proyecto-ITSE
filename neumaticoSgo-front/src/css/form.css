@@ -74,3 +74,9 @@
 .input-control input:focus {
     outline: 0;
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 15PX;
+  }
