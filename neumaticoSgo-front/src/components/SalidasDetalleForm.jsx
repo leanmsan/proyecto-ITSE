@@ -9,8 +9,13 @@ export function RegistroSalidaDetalleForm() {
     const navigate = useNavigate();
     const [idsalida_id, setIdSalida] = useState("");
     const [idproducto_id, setIdProducto] = useState("");
+    const [errorProductoid, setErrorProductoid] = useState(false);
+
     const [cantidad, setCantidad] = useState("");
+    const [errorCantidad, setErrorCantidad] = useState(false);
+
     const [preciounitario, setPrecioUnitario] = useState("");
+    const [errorPrecioUnitario, setErrorPrecioUnitario] = useState(false);
     const [productos, setProductos] = useState([]);
     const [lastInsertedId, setLastInsertedId] = useState('');
 
@@ -75,6 +80,24 @@ export function RegistroSalidaDetalleForm() {
                 body: JSON.stringify(salidaDetalle),
             });
 
+            if (idproducto_id.trim() === '') {
+                setErrorProductoid(true);
+              }else{
+                setErrorProductoid(false)
+              }
+        
+              if (cantidad <= 0) {
+                setErrorCantidad(true);
+              }else{
+                setErrorCantidad(false)
+              }
+          
+              if (preciounitario.trim() === '') {
+                setErrorPrecioUnitario(true);
+              }else{
+                setErrorPrecioUnitario(false)
+              }
+
             if (response.ok) {
                 console.log('detalle de salida creado exitosamente');
                 console.log('esto es respone de salida detalle', response)
@@ -105,7 +128,8 @@ export function RegistroSalidaDetalleForm() {
                     <select
                         name='producto'
                         value={idproducto_id}
-                        onChange={(e) => setIdProducto(e.target.value)}
+                        onChange={(e) => {setIdProducto(e.target.value)
+                            setErrorProductoid(false)}}
                     >
                         <option value=''>Seleccione un producto</option>
                         {productos.map((producto) => (
@@ -114,20 +138,25 @@ export function RegistroSalidaDetalleForm() {
                             </option>
                         ))}
                     </select>
+                    {errorProductoid && <div className='error-message'>Es requerido que seleccione un producto</div>}
                     <br />
                     <label>Cantidad</label>
                     <input
                         type='number'
                         name='cantidad'
-                        onChange={(e) => setCantidad(e.target.value)}
+                        onChange={(e) => {setCantidad(e.target.value)
+                            setErrorCantidad(false)}}
                     />
+                    {errorCantidad && <div className='error-message'>Es requerido que ingrese una cantidad</div>}
                     <br />
                     <label>Precio Unitario</label>
                     <input
                         type='number'
                         name='precio-unitario'
-                        onChange={(e) => setPrecioUnitario(e.target.value)}
+                        onChange={(e) => {setPrecioUnitario(e.target.value)
+                            setErrorPrecioUnitario(false)}}
                     />
+                    {errorPrecioUnitario && <div className='error-message'>Es requerido que ingrese un precio unitario</div>}
                 </div>
                 <button className='button' type='submit'>
                     Enviar

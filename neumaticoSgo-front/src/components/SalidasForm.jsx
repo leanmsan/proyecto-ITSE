@@ -10,11 +10,17 @@ import { RegistroSalidaDetalleForm } from './SalidasDetalleForm';
 export function RegistroSalidasForm() {
     const navegate = useNavigate()
     const [idproveedor_id, setIdProveedor] = useState("")
+    const [errorIdProveedor, setErrorIdProveedor] = useState(false);
+
     const [fecha, setFecha] = useState("")
+    const [errorFecha, setErrorFecha] = useState(false);
+
     const [montototal, setMontoTotal] = useState("")
+    const [errorMontoTotal, setErrorMontoTotal] = useState(false);
+
     const [proveedores, setProveedores] = useState([]);
     const handleSubmit = async (e) => {
-        
+        e.preventDefault();
 
         const salida = {
             idproveedor_id,
@@ -30,6 +36,26 @@ export function RegistroSalidasForm() {
                 },
                 body: JSON.stringify(salida)
             })
+
+            if (idproveedor_id.trim() === '') {
+                setErrorIdProveedor(true);
+            } else {
+                setErrorIdProveedor(false)
+            }
+
+            if (fecha.trim() === '') {
+                setErrorFecha(true);
+            } else {
+                setErrorFecha(false)
+            }
+
+            if (montototal.trim() === '') {
+                setErrorMontoTotal(true);
+            } else {
+                setErrorMontoTotal(false)
+            }
+
+
             if (response.ok) {
                 console.log(response, "esto es response")
                 console.log('salida creada exitosamente')
@@ -77,7 +103,8 @@ export function RegistroSalidasForm() {
                         <select
                             name='proveedor'
                             value={idproveedor_id}
-                            onChange={(e) => setIdProveedor(e.target.value)}
+                            onChange={(e) => { setIdProveedor(e.target.value)
+                                setErrorIdProveedor(false)}}
                         >
                             <option value=''>Seleccione un proveedor</option>
                             {proveedores.map((proveedor) => (
@@ -87,22 +114,26 @@ export function RegistroSalidasForm() {
                             ))}
                         </select>
                     </div>
+                    {errorIdProveedor && <div className="error-message">Es requerido que seleccion un proveedor</div>}
                     <br />
                     <label>Fecha</label>
                     <input
                         type='date'
                         name='fecha'
-                        onChange={(e) => setFecha(e.target.value)}
+                        onChange={(e) => { setFecha(e.target.value)
+                            setErrorFecha(false)}}
                     />
-
+                    {errorFecha && <div className="error-message">Es requerido que ingrese una fecha</div>}
                     <br />
 
                     <label>Monto Total</label>
                     <input
                         type='text'
                         name='monto-total'
-                        onChange={(e) => setMontoTotal(e.target.value)}
+                        onChange={(e) => { setMontoTotal(e.target.value)
+                            setErrorMontoTotal(false)}}
                     />
+                    {errorMontoTotal && <div className="error-message">Es requerido que ingrese un monto total</div>}
                 </div>
                 <button className='button' type="submit">Enviar</button>
             </form>
