@@ -3,10 +3,8 @@ import { useState } from "react";
 import "../css/form.css"
 import { Sidebar } from "./Sidebar";
 import { NavBar } from "./NavBar";
-import { useNavigate } from "react-router-dom";
 
 export function ProveedoresForm () {
-    const navegate = useNavigate()
     const [cuitproveedor, setCuitProveedor] = useState("");
     const [errorCuitProveedor, setErrorCuitProveedor] = useState(false);
 
@@ -130,7 +128,8 @@ export function ProveedoresForm () {
               onChange={(e) => {setCuitProveedor(e.target.value)
                 setErrorCuitProveedor(false)}}
             />
-            {errorCuitProveedor && <div className='error-message'>Cuit Proveedor es requerido</div>}
+            {errorCuitProveedor && <div className='error-message'>
+              El cuit del proveedor es requerido</div>}
             <br />
             <label>Nombre</label>
             <input
@@ -139,7 +138,7 @@ export function ProveedoresForm () {
               onChange={(e) => {setNombre(e.target.value)
                 setErrorNombre(false)}}
             />
-            {errorNombre && <div className='error-message'>Nombre es requerido</div>}
+            {errorNombre && <div className='error-message'>El nombre es requerido</div>}
             <br />
 
             <label>Razón Social</label>
@@ -149,7 +148,7 @@ export function ProveedoresForm () {
               onChange={(e) => {setRazonSocial(e.target.value)
                 setErrorRazonSocial(false) }}
             />
-            {errorRazonSocial && <div className='error-message'>Razón Social es requerido</div>}
+            {errorRazonSocial && <div className='error-message'>La razón Social es requerida</div>}
             <br />
 
             
@@ -160,7 +159,7 @@ export function ProveedoresForm () {
               onChange={(e) => {setDireccion(e.target.value)
                 setErrorDireccion(false)}}
             />
-            {errorDireccion && <div className='error-message'>Dirección es requerido</div>}
+            {errorDireccion && <div className='error-message'>La dirección es requerida</div>}
             <br />
 
             <label>Localidad</label>
@@ -170,7 +169,7 @@ export function ProveedoresForm () {
               onChange={(e) => {setLocalidad(e.target.value)
                 setErrorLocalidad(false)}}
             />
-            {errorLocalidad && <div className='error-message'>Localidad es requerido</div>}
+            {errorLocalidad && <div className='error-message'>La localidad es requerido</div>}
             <br />
 
             <label>Provincia</label>
@@ -180,7 +179,7 @@ export function ProveedoresForm () {
               onChange={(e) => {setProvincia(e.target.value)
                 setErrorProvincia(false) }}
             />
-            {errorProvincia && <div className='error-message'>Provincia es requerido</div>}
+            {errorProvincia && <div className='error-message'>La provincia es requerido</div>}
             <br />
 
             <label>Contacto</label>
@@ -190,7 +189,7 @@ export function ProveedoresForm () {
               onChange={(e) => {setContacto(e.target.value)
                 setErrorContacto(false)}}
             />
-            {errorContacto && <div className='error-message'>Contacto es requerido</div>}
+            {errorContacto && <div className='error-message'>El contacto es requerido</div>}
             <br />
 
             <label>Estado (A o B)</label>
