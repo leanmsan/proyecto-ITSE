@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import "../css/form.css"
 import { Sidebar } from './Sidebar';
 import { NavBar } from './NavBar';
 
 export function DynamicForm() {
-  const navigate = useNavigate();
 
   const [nombre, setNombre] = useState('');
   const [errorNombre, setErrorNombre] = useState(false);
@@ -34,7 +32,6 @@ export function DynamicForm() {
     valor: ''
   });
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -57,49 +54,48 @@ export function DynamicForm() {
         },
         body: JSON.stringify(producto),
       });
-  
 
       if (nombre.trim() === '') {
-      setErrorNombre(true);
-    }else{
-      setErrorNombre(false)
-    }
-
-    if (descripcion.trim() === '') {
-      setErrorDescripcion(true);
-    }else{
-      setErrorDescripcion(false)
-    }
-
-    if (preciocompra.trim() === '') {
-      setErrorPrecioCompra(true);
-    }else{
-      setErrorPrecioCompra(false)
-    }
-
-    if (precioventa.trim() === '') {
-      setErrorPrecioVenta(true);
-    }else{
-      setErrorPrecioVenta(false)
-    }
-
-    if (marca.trim() === '') {
-      setErrorMarca(true);
-    }else{
-      setErrorMarca(false)
-    }
-
-    if (stockdisponible <= 0) {
-      setErrorStockDisponible(true);
-    }else{
-      setErrorStockDisponible(false)
-    }
-
-    if (rubro_id.trim() === '') {
-      setErrorRubro(true);
-    }else{
-      setErrorRubro(false)
-    }
+        setErrorNombre(true);
+      }else{
+        setErrorNombre(false)
+      }
+  
+      if (descripcion.trim() === '') {
+        setErrorDescripcion(true);
+      }else{
+        setErrorDescripcion(false)
+      }
+  
+      if (preciocompra.trim() === '') {
+        setErrorPrecioCompra(true);
+      }else{
+        setErrorPrecioCompra(false)
+      }
+  
+      if (precioventa.trim() === '') {
+        setErrorPrecioVenta(true);
+      }else{
+        setErrorPrecioVenta(false)
+      }
+  
+      if (marca.trim() === '') {
+        setErrorMarca(true);
+      }else{
+        setErrorMarca(false)
+      }
+  
+      if (stockdisponible <= 0) {
+        setErrorStockDisponible(true);
+      }else{
+        setErrorStockDisponible(false)
+      }
+  
+      if (rubro_id.trim() === '') {
+        setErrorRubro(true);
+      }else{
+        setErrorRubro(false)
+      }
 
       if (response.ok) {
         console.log('El formulario se envió correctamente');
@@ -129,12 +125,11 @@ export function DynamicForm() {
     }
   };
 
-  
   return (
     <div className='container'>
       <Sidebar />
       <NavBar />
-      <form className='form' onSubmit={handleSubmit} >
+      <form className='form' onSubmit={handleSubmit}>
         <h1 className='title'>Alta de Producto</h1>
         <div className='input-control'>
           <label>
@@ -143,9 +138,9 @@ export function DynamicForm() {
               type='text'
               value={nombre}
               onChange={(e) => {setNombre(e.target.value)
-                                setErrorNombre(false)}}
-            />
-            {errorNombre && <div className="error-message">Nombre es requerido</div>}
+                setErrorNombre(false)}}
+              />
+              {errorNombre && <div className="error-message">El nombre es requerido</div>}
           </label>
           <br />
           <label>
@@ -154,9 +149,9 @@ export function DynamicForm() {
               type='text'
               value={descripcion}
               onChange={(e) => {setDescripcion(e.target.value)
-                setErrorDescripcion(false)}}
+              setErrorDescripcion(false)}}
             />
-            {errorDescripcion && <div className="error-message">Descripcion es requerida</div>}
+            {errorDescripcion && <div className="error-message">La descripcion es requerida</div>}
           </label>
           <br />
           <label>
@@ -228,22 +223,20 @@ export function DynamicForm() {
             ))}
             <br />
             <div>
-              <label>
               <input
                 type='text'
                 placeholder='clave'
                 value={nuevaCaracteristica.clave}
                 onChange={(e) => setNuevaCaracteristica({ ...nuevaCaracteristica, clave: e.target.value })}
-              />   
-              </label>
-              <label>
+              />
+
               <input
                 type="text"
                 placeholder='valor'
                 value={nuevaCaracteristica.valor}
                 onChange={(e) => setNuevaCaracteristica({ ...nuevaCaracteristica, valor: e.target.value })}
               />
-              </label>
+
             </div>
             <button type='button' onClick={handleAgregarCaracteristica}>
               Agregar Característica
