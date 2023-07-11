@@ -192,7 +192,7 @@ export function ProveedoresForm () {
             {errorContacto && <div className='error-message'>El contacto es requerido</div>}
             <br />
 
-            <label>Estado (A o B)</label>
+            <label>Estado (A o I)</label>
             <input
               type='text'
               name='contacto'
