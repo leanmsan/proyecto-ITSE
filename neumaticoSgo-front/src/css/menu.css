@@ -260,3 +260,8 @@ nav.close ~ .top {
     background-color: transparent;
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
 }
+
+.scrollable-sidebar {
+    max-height: 400px; /* Establece la altura máxima que desees */
+    overflow-y: auto;
+  }
