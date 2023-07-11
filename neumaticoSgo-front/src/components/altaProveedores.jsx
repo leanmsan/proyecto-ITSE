@@ -94,7 +94,7 @@ export function ProveedoresForm () {
               setErrorContacto(false)
             }
 
-            if (estado.trim() !== 'A' && estado.trim() !== 'B') {
+            if (estado.trim() !== 'A' && estado.trim() !== 'I') {
               setErrorEstado(true);
             }else{
               setErrorEstado(false)
