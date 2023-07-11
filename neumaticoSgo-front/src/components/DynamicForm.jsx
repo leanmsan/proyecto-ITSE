@@ -1,36 +1,55 @@
-import React, { useState } from 'react';
-import "../css/form.css"
-import { Sidebar } from './Sidebar';
-import { NavBar } from './NavBar';
+import React, { useEffect, useState } from "react";
+import "../css/form.css";
+import { Sidebar } from "./Sidebar";
+import { NavBar } from "./NavBar";
 
 export function DynamicForm() {
-
-  const [nombre, setNombre] = useState('');
+  const [nombre, setNombre] = useState("");
   const [errorNombre, setErrorNombre] = useState(false);
 
-  const [descripcion, setDescripcion] = useState('');
+  const [descripcion, setDescripcion] = useState("");
   const [errorDescripcion, setErrorDescripcion] = useState(false);
 
-  const [preciocompra, setPrecioCompra] = useState('');
+  const [preciocompra, setPrecioCompra] = useState("");
   const [errorPrecioCompra, setErrorPrecioCompra] = useState(false);
 
-  const [precioventa, setPrecioVenta] = useState('');
+  const [precioventa, setPrecioVenta] = useState("");
   const [errorPrecioVenta, setErrorPrecioVenta] = useState(false);
 
-  const [marca, setMarca] = useState('');
+  const [marca, setMarca] = useState("");
   const [errorMarca, setErrorMarca] = useState(false);
 
   const [stockdisponible, setStockDisponible] = useState(0);
   const [errorStockDisponible, setErrorStockDisponible] = useState(false);
 
-  const [rubro_id, setRubro_id] = useState('');
+  const [rubro_id, setRubro_id] = useState("");
   const [errorRubro, setErrorRubro] = useState(false);
+
+  const [rubros, setRubros] = useState([]);
 
   const [caracteristicas, setCaracteristicas] = useState({});
   const [nuevaCaracteristica, setNuevaCaracteristica] = useState({
-    clave: '',
-    valor: ''
+    clave: "",
+    valor: "",
   });
+
+  useEffect(() => {
+    const fetchRubros = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/productos/");
+        const data = await response.json();
+
+        const uniqueRubros = [
+          ...new Set(data.productos.map((producto) => producto.rubro_id)),
+        ];
+        console.log("esto es uniqueRubros", uniqueRubros);
+        setRubros(uniqueRubros);
+      } catch (error) {
+        console.log("erro al obtener los rubros de la api", error);
+      }
+    };
+    fetchRubros();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,63 +66,63 @@ export function DynamicForm() {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/productos/', {
-        method: 'POST',
+      const response = await fetch("http://127.0.0.1:8000/api/productos/", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(producto),
       });
 
-      if (nombre.trim() === '') {
+      if (nombre.trim() === "") {
         setErrorNombre(true);
-      }else{
-        setErrorNombre(false)
+      } else {
+        setErrorNombre(false);
       }
-  
-      if (descripcion.trim() === '') {
+
+      if (descripcion.trim() === "") {
         setErrorDescripcion(true);
-      }else{
-        setErrorDescripcion(false)
+      } else {
+        setErrorDescripcion(false);
       }
-  
-      if (preciocompra.trim() === '') {
+
+      if (preciocompra.trim() === "") {
         setErrorPrecioCompra(true);
-      }else{
-        setErrorPrecioCompra(false)
+      } else {
+        setErrorPrecioCompra(false);
       }
-  
-      if (precioventa.trim() === '') {
+
+      if (precioventa.trim() === "") {
         setErrorPrecioVenta(true);
-      }else{
-        setErrorPrecioVenta(false)
+      } else {
+        setErrorPrecioVenta(false);
       }
-  
-      if (marca.trim() === '') {
+
+      if (marca.trim() === "") {
         setErrorMarca(true);
-      }else{
-        setErrorMarca(false)
+      } else {
+        setErrorMarca(false);
       }
-  
+
       if (stockdisponible <= 0) {
         setErrorStockDisponible(true);
-      }else{
-        setErrorStockDisponible(false)
+      } else {
+        setErrorStockDisponible(false);
       }
-  
-      if (rubro_id.trim() === '') {
+
+      if (rubro_id.trim() === "") {
         setErrorRubro(true);
-      }else{
-        setErrorRubro(false)
+      } else {
+        setErrorRubro(false);
       }
 
       if (response.ok) {
-        console.log('El formulario se envió correctamente');
+        console.log("El formulario se envió correctamente");
       } else {
-        console.log('Error al enviar el formulario');
+        console.log("Error al enviar el formulario");
       }
     } catch (error) {
-      console.log('Error en la solicitud POST', error);
+      console.log("Error en la solicitud POST", error);
     }
   };
 
@@ -119,94 +138,133 @@ export function DynamicForm() {
       });
 
       setNuevaCaracteristica({
-        clave: '',
-        valor: '',
+        clave: "",
+        valor: "",
       });
     }
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       <Sidebar />
       <NavBar />
-      <form className='form' onSubmit={handleSubmit}>
-        <h1 className='title'>Alta de Producto</h1>
-        <div className='input-control'>
+      <form className="form" onSubmit={handleSubmit}>
+        <h1 className="title">Alta de Producto</h1>
+        <div className="input-control">
           <label>
             Nombre
             <input
-              type='text'
+              type="text"
               value={nombre}
-              onChange={(e) => {setNombre(e.target.value)
-                setErrorNombre(false)}}
-              />
-              {errorNombre && <div className="error-message">El nombre es requerido</div>}
+              onChange={(e) => {
+                setNombre(e.target.value);
+                setErrorNombre(false);
+              }}
+            />
+            {errorNombre && (
+              <div className="error-message">El nombre es requerido</div>
+            )}
           </label>
           <br />
           <label>
             Descripción
             <input
-              type='text'
+              type="text"
               value={descripcion}
-              onChange={(e) => {setDescripcion(e.target.value)
-              setErrorDescripcion(false)}}
+              onChange={(e) => {
+                setDescripcion(e.target.value);
+                setErrorDescripcion(false);
+              }}
             />
-            {errorDescripcion && <div className="error-message">La descripcion es requerida</div>}
+            {errorDescripcion && (
+              <div className="error-message">La descripcion es requerida</div>
+            )}
           </label>
           <br />
           <label>
             Precio de Compra
             <input
-              type='text'
+              type="text"
               value={preciocompra}
-              onChange={(e) => {setPrecioCompra(e.target.value)
-                setErrorPrecioCompra(false)}}
+              onChange={(e) => {
+                setPrecioCompra(e.target.value);
+                setErrorPrecioCompra(false);
+              }}
             />
-            {errorPrecioCompra && <div className="error-message">El precio de compra es requerido</div>}
+            {errorPrecioCompra && (
+              <div className="error-message">
+                El precio de compra es requerido
+              </div>
+            )}
           </label>
           <br />
           <label>
             Precio de Venta
             <input
-              type='text'
+              type="text"
               value={precioventa}
-              onChange={(e) => {setPrecioVenta(e.target.value)
-                setErrorPrecioVenta(false)}}
+              onChange={(e) => {
+                setPrecioVenta(e.target.value);
+                setErrorPrecioVenta(false);
+              }}
             />
-            {errorPrecioVenta && <div className="error-message">El precio de venta es requerido</div>}
+            {errorPrecioVenta && (
+              <div className="error-message">
+                El precio de venta es requerido
+              </div>
+            )}
           </label>
           <br />
           <label>
             Marca
             <input
-              type='text'
+              type="text"
               value={marca}
-              onChange={(e) => {setMarca(e.target.value)
-                setErrorMarca(false)}}
+              onChange={(e) => {
+                setMarca(e.target.value);
+                setErrorMarca(false);
+              }}
             />
-            {errorMarca && <div className="error-message">La marca es requerida</div>}
+            {errorMarca && (
+              <div className="error-message">La marca es requerida</div>
+            )}
           </label>
           <br />
           <label>
             Stock Disponible
             <input
-              type='number'
+              type="number"
               value={stockdisponible}
-              onChange={(e) => {setStockDisponible(e.target.value)
-                setErrorStockDisponible(false)}}
+              onChange={(e) => {
+                setStockDisponible(e.target.value);
+                setErrorStockDisponible(false);
+              }}
             />
-            {errorStockDisponible && <div className="error-message">El stock disponible debe ser mayor a 0</div>}
+            {errorStockDisponible && (
+              <div className="error-message">
+                El stock disponible debe ser mayor a 0
+              </div>
+            )}
           </label>
           <br />
           <label>
             Rubro
-            <input
-              type='text'
+            <select
               value={rubro_id}
-              onChange={(e) => {setRubro_id(e.target.value)
-                setErrorRubro(false)}}
-            />
-            {errorRubro && <div className="error-message">El rubro es requerido</div>}
+              onChange={(e) => setRubro_id(e.target.value)}
+            >
+              <option value="">Seleccionar Rubros</option>
+              {rubros.map((rubro) => {
+                return (
+                  <option key={rubro} value={rubro}>
+                    {rubro}
+                  </option>
+                );
+              })}
+            </select>
+            {errorRubro && (
+              <div className="error-message">El rubro es requerido</div>
+            )}
           </label>
           <br />
           <label>
@@ -214,38 +272,45 @@ export function DynamicForm() {
             <br />
             {Object.keys(caracteristicas).map((key) => (
               <div key={key}>
-                <input
-                  type="text"
-                  value={caracteristicas[key]}
-                  readOnly
-                />
+                <input type="text" value={caracteristicas[key]} readOnly />
               </div>
             ))}
             <br />
             <div>
               <input
-                type='text'
-                placeholder='clave'
+                type="text"
+                placeholder="clave"
                 value={nuevaCaracteristica.clave}
-                onChange={(e) => setNuevaCaracteristica({ ...nuevaCaracteristica, clave: e.target.value })}
+                onChange={(e) =>
+                  setNuevaCaracteristica({
+                    ...nuevaCaracteristica,
+                    clave: e.target.value,
+                  })
+                }
               />
 
               <input
                 type="text"
-                placeholder='valor'
+                placeholder="valor"
                 value={nuevaCaracteristica.valor}
-                onChange={(e) => setNuevaCaracteristica({ ...nuevaCaracteristica, valor: e.target.value })}
+                onChange={(e) =>
+                  setNuevaCaracteristica({
+                    ...nuevaCaracteristica,
+                    valor: e.target.value,
+                  })
+                }
               />
-
             </div>
-            <button type='button' onClick={handleAgregarCaracteristica}>
+            <button type="button" onClick={handleAgregarCaracteristica}>
               Agregar Característica
             </button>
           </label>
           <br />
         </div>
 
-        <button className='button' type="submit">Enviar</button>
+        <button className="button" type="submit">
+          Enviar
+        </button>
       </form>
     </div>
   );
