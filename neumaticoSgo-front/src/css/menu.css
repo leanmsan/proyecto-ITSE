@@ -262,7 +262,7 @@ nav.close ~ .top {
 }
 
 .scrollable-sidebar {
-    max-height: 500px; /* Establece la altura máxima que desees */
+    max-height: 800px; /* Establece la altura máxima que desees */
     overflow-y: auto;
   }
 
