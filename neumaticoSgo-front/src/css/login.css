@@ -1,25 +1,49 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 .login-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: #fcb404;
+}
+
+.imagen-login {
+  width: 50%;
+  height: fit-content;
+  background-color: #fff;
+  align-items: end;
+  justify-content: flex-end;
+  display: flex;
+
+  .login-imagen {
+    min-width: fit-content;
+    max-height: 100vh;
+    align-items: end;
+  }
+}
+
+.login {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
-    background: #fcb404;
-}
-
-.login-logo {
-    width: 25vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    
+  .login-logo {
+    width: 10vw;
     margin: 10vh;
-}
+  }
 
-.login-form {
+  .login-form {
     display: flex;
     flex-direction: column;
     background: #ffffff;
@@ -27,39 +51,39 @@
     padding: 7vh;
     box-shadow: 0 5px 10px rgba(3, 13, 71, 0.7);
     border-radius: 5px;
-}
+  }
 
-.login-title {
-    color: #003084;
+  .login-title {
+    color: #fcb404;
     font-size: 2em;
     font-weight: 800;
     margin-bottom: 30px;
-}
+  }
 
-.login-label {
+  .login-label {
     margin-bottom: 35px;
-}
+  }
 
-.login-label .fa-solid {
+  .login-label .fa-solid {
     font-size: 1em;
-    color: #003084;
+    color: #fcb404;
     margin-right: 10px;
-}
+  }
 
-.login-label input {
+  .login-label input {
     outline: none;
     border: none;
     color: #252525;
     border-bottom: solid 1px #1b2256;
     padding: 0 5px;
     font-size: 1em;
-}
+  }
 
-.login-label input::placeholder {
+  .login-label input::placeholder {
     color: rgba(37, 37, 37, 0.5);
-}
+  }
 
-.login-form button {
+  .login-form button {
     color: #fff;
     border: none;
     background: #747474;
@@ -67,20 +91,21 @@
     cursor: pointer;
     font-size: 1em;
     border-radius: 5px;
-}
+  }
 
-.login-form button:hover {
+  .login-form button:hover {
     color: #fff;
     border: none;
-    background:  #fcb404 ;
+    background: #fcb404;
     padding: 10px 15px;
     cursor: pointer;
     font-size: 1em;
     border-radius: 5px;
-}
+  }
 
-.error-message {
+  .error-message {
     color: red;
     font-size: 14px;
-    margin-top: 15PX;
+    margin-top: 15px;
   }
+}
