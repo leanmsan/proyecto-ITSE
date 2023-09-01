@@ -14,7 +14,7 @@
 .title {
     text-align: center;
     margin-bottom: 2rem;
-    color: #003084;
+    color: #000;
     font-size: 28px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
@@ -25,12 +25,23 @@
     margin-top: 10px;
     width: 100%;
     color: white;
-    background-color: #003084;
+    background-color: #7e530f ;
     border-radius: 4px;
     border: none;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
+}
+
+.button:hover{
+    color: #fff;
+    border: none;
+    background: #747474;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
+
 }
 
 .input-control {
@@ -51,7 +62,7 @@
 
 .input-control label {
     margin-bottom: .4rem;
-    color: #003084;
+    color: #000;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
@@ -62,12 +73,21 @@
     margin-top: 10px;
     width: 100%;
     color: white;
-    background-color: #003084;
+    background-color: #7e530f;
     border-radius: 4px;
     border: none;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
+}
+.input-control label button:hover {
+    color: #fff;
+    border: none;
+    background: #747474;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
 }
 
 .input-control input:focus {
