@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../img/logo.png";
+import logo from "../img/logo1.png";
 import "../css/menu.css";
 import { useNavigate } from "react-router-dom";
 
@@ -36,16 +36,6 @@ export function Sidebar({ handleTabClick, selectedTab, handleAuthentication }) {
       <div className="menu-items">
         <div className="scrollable-sidebar">
         <ul className="nav-links">
-          <li
-            className={`nav-link-item ${
-              selectedTab === "inicio" ? "active" : ""
-            }`}
-          >
-            <Link to="/inicio">
-              <i className="fa-solid fa-house-chimney nav-link-icon"></i>
-              <span className="link-name">Inicio</span>
-            </Link>
-          </li>
           <li
             className={`nav-link-item ${
               selectedTab === "productos" ? "active" : ""

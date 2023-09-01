@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../css/login.css"
-import LoginLogo from "../img/logo.png";
+// import LoginLogo from "../img/logo.png";
+import LoginLogo from "../img/Logo1.png";
 import { Navigate, useNavigate  } from "react-router-dom";
 
 export function Login({handleAuthentication }) {
