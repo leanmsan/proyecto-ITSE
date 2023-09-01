@@ -15,7 +15,7 @@
 }
 
 .imagen-login {
-  width: 50%;
+  width: fit-content;
   height: fit-content;
   background-color: #fff;
   align-items: end;
