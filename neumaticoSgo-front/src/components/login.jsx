@@ -3,7 +3,7 @@ import "../css/login.css"
 // import LoginLogo from "../img/logo.png";
 import LoginLogo from "../img/loginlogo.png";
 import imagenlogin from '../img/imagen-login.png'
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 export function Login({ handleAuthentication }) {
   const [error, setError] = useState(null);
@@ -64,9 +64,9 @@ export function Login({ handleAuthentication }) {
         </div>
 
         <button type="Submit" >Iniciar sesion</button>
+        <Link to="/recuperar-contrasena">Recuperar Contraseña</Link>
       </form>
       </div>
-
     </div>
   )
 }
