@@ -48,7 +48,6 @@ export function Login({ handleAuthentication }) {
       <div className="imagen-login">
         <img className="login-imagen" src={imagenlogin} alt="" />
       </div>
-      
       <div className="login">
       <img className="login-logo" src={LoginLogo} alt="" />
       <form className="login-form" onSubmit={handleSubmit} method="post">
@@ -62,11 +61,9 @@ export function Login({ handleAuthentication }) {
           <input type="password" id="password" value={password} placeholder="contraseña" onChange={handlePasswordChange} />
           {error && <div className="error-message">Los datos ingresados no son correctos</div>}
         </div>
-
         <button type="Submit" >Iniciar sesion</button>
       </form>
       </div>
-
     </div>
   )
 }
