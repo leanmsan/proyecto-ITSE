@@ -25,11 +25,15 @@ export function Sidebar({ handleTabClick, selectedTab, handleAuthentication }) {
     setEntradasOpen(false);
   };
 
+  const handleLogoClick = () => {
+    navigate("/inicio");
+  }
+
   return (
     <nav>
       <div className="logo-name">
         <div className="logo-image">
-          <img src={logo} alt="Logo Neumatico Santiago" />
+          <img src={logo} alt="Logo Cervecería Del Barco" onClick={handleLogoClick}/>
         </div>
       </div>
 
