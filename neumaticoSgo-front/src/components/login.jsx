@@ -3,7 +3,7 @@ import "../css/login.css"
 // import LoginLogo from "../img/logo.png";
 import LoginLogo from "../img/loginlogo.png";
 import imagenlogin from '../img/imagen-login.png'
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 export function Login({ handleAuthentication }) {
   const [error, setError] = useState(null);
@@ -49,20 +49,21 @@ export function Login({ handleAuthentication }) {
         <img className="login-imagen" src={imagenlogin} alt="" />
       </div>
       <div className="login">
-      <img className="login-logo" src={LoginLogo} alt="" />
-      <form className="login-form" onSubmit={handleSubmit} method="post">
-        <h1 className="login-title">Login</h1>
-        <div className="login-label">
-          <i className="fa-solid fa-user"></i>
-          <input type="text" id="username" value={username} placeholder="usuario" onChange={handleUsernameChange} />
-        </div>
-        <div className="login-label">
-          <i className="fa-solid fa-lock"></i>
-          <input type="password" id="password" value={password} placeholder="contraseña" onChange={handlePasswordChange} />
-          {error && <div className="error-message">Los datos ingresados no son correctos</div>}
-        </div>
-        <button type="Submit" >Iniciar sesion</button>
-      </form>
+        <img className="login-logo" src={LoginLogo} alt="" />
+        <form className="login-form" onSubmit={handleSubmit} method="post">
+          <h2 className="login-title">Login</h2>
+          <div className="login-label">
+            <i className="fa-solid fa-user"></i>
+            <input type="text" id="username" value={username} placeholder="usuario" onChange={handleUsernameChange} />
+          </div>
+          <div className="login-label">
+            <i className="fa-solid fa-lock"></i>
+            <input type="password" id="password" value={password} placeholder="contraseña" onChange={handlePasswordChange} />
+            {error && <div className="error-message">Los datos ingresados no son correctos</div>}
+          </div>
+          <button type="Submit" >Iniciar sesion</button>
+          <Link className="recuperar-contraseña" to="/recuperar-contrasena">Olvidé mi contrasena</Link>
+        </form>
       </div>
     </div>
   )
