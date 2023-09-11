@@ -8,12 +8,12 @@ import { Navigate, useNavigate, Link } from "react-router-dom";
 export function Login({ handleAuthentication }) {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navegate = useNavigate()
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -22,14 +22,14 @@ export function Login({ handleAuthentication }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`username: ${username}`);
+    console.log(`email: ${email}`);
     console.log(`password: ${password}`);
     const response = await fetch('http://127.0.0.1:8000/api2/api-token-auth/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (response.ok) {
@@ -54,7 +54,7 @@ export function Login({ handleAuthentication }) {
           <h2 className="login-title">Login</h2>
           <div className="login-label">
             <i className="fa-solid fa-user"></i>
-            <input type="text" id="username" value={username} placeholder="usuario" onChange={handleUsernameChange} />
+            <input type="text" id="username" value={email} placeholder="email" onChange={handleEmailChange} />
           </div>
           <div className="login-label">
             <i className="fa-solid fa-lock"></i>
