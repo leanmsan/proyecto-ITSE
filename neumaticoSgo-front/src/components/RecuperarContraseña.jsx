@@ -8,19 +8,29 @@ function PasswordRecovery() {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+    const newEmail = e.target.value
+    setEmail(newEmail);
+    if(!emailRegex.test(newEmail)){
+      setMessage('correo electronico no valido')
+    } else {
+      setMessage('')
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      // Aquí deberías enviar una solicitud al servidor para recuperar la contraseña
-      // Puedes usar una librería como axios o la función fetch para hacer la solicitud
+      if(!emailRegex.test(email)){
+        setMessage('correo electronico no valido')
+        setIsLoading(false)
+        return
+      }
 
-      // Ejemplo de solicitud ficticia
       const response = await fetch('/api/password-recovery', {
         method: 'POST',
         headers: {
@@ -55,12 +65,12 @@ function PasswordRecovery() {
           <label className='recupcont-label'>
             Correo Electrónico
             <input type="email" value={email} onChange={handleEmailChange} required />
+        <p>{message}</p>
           </label>
           <button type="submit" disabled={isLoading}>
             {isLoading ? 'Enviando...' : 'Enviar Solicitud'}
           </button>
         </form>
-        <p>{message}</p>
       </div>
     </div>
   );
