@@ -16,7 +16,7 @@
 
 .imagen-login {
   width: fit-content;
-  height: fit-content;
+  height: 100%;
   background-color: #fff;
   align-items: end;
   justify-content: flex-end;
