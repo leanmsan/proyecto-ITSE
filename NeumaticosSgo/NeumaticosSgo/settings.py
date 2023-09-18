@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'NeumaticosSgo.wsgi.application'
 DATABASES = {
       'default': {
           'ENGINE': 'django.db.backends.mysql',
-          'NAME': 'NeumaticosSgo',
+          'NAME': 'delbarco',
           'USER': 'admin',
           'PASSWORD': 'admin',
           'HOST': '127.0.0.1',
