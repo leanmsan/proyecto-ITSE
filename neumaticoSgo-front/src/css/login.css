@@ -57,7 +57,8 @@
     color: #fcb404;
     font-size: 2em;
     font-weight: 800;
-    margin-bottom: 30px;
+    margin-top: -20px;
+    margin-bottom: 20px;
   }
 
   .login-label {
@@ -107,5 +108,10 @@
     color: red;
     font-size: 14px;
     margin-top: 15px;
+  }
+
+  .recuperar-contraseña {
+    margin-top: 10px;
+    margin-bottom: -20px;
   }
 }

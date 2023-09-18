@@ -61,7 +61,7 @@ export function Login({ handleAuthentication }) {
             <input type="password" id="password" value={password} placeholder="contraseña" onChange={handlePasswordChange} />
             {error && <div className="error-message">Los datos ingresados no son correctos</div>}
           </div>
-          <button type="Submit" >Iniciar sesion</button>
+          <button type="Submit">Iniciar sesion</button>
           <Link className="recuperar-contraseña" to="/recuperar-contrasena">Olvidé mi contrasena</Link>
         </form>
       </div>
