@@ -8,12 +8,12 @@ import { Navigate, useNavigate, Link } from "react-router-dom";
 export function Login({ handleAuthentication }) {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const navegate = useNavigate()
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -22,14 +22,14 @@ export function Login({ handleAuthentication }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`email: ${email}`);
+    console.log(`username: ${username}`);
     console.log(`password: ${password}`);
     const response = await fetch('http://127.0.0.1:8000/api2/api-token-auth/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     });
 
     if (response.ok) {
@@ -49,21 +49,21 @@ export function Login({ handleAuthentication }) {
         <img className="login-imagen" src={imagenlogin} alt="" />
       </div>
       <div className="login">
-        <img className="login-logo" src={LoginLogo} alt="" />
-        <form className="login-form" onSubmit={handleSubmit} method="post">
-          <h2 className="login-title">Login</h2>
-          <div className="login-label">
-            <i className="fa-solid fa-user"></i>
-            <input type="text" id="username" value={email} placeholder="email" onChange={handleEmailChange} />
-          </div>
-          <div className="login-label">
-            <i className="fa-solid fa-lock"></i>
-            <input type="password" id="password" value={password} placeholder="contraseña" onChange={handlePasswordChange} />
-            {error && <div className="error-message">Los datos ingresados no son correctos</div>}
-          </div>
-          <button type="Submit">Iniciar sesion</button>
-          <Link className="recuperar-contraseña" to="/recuperar-contrasena">Olvidé mi contrasena</Link>
-        </form>
+      <img className="login-logo" src={LoginLogo} alt="" />
+      <form className="login-form" onSubmit={handleSubmit} method="post">
+        <h1 className="login-title">Login</h1>
+        <div className="login-label">
+          <i className="fa-solid fa-user"></i>
+          <input type="text" id="username" value={username} placeholder="usuario" onChange={handleUsernameChange} />
+        </div>
+        <div className="login-label">
+          <i className="fa-solid fa-lock"></i>
+          <input type="password" id="password" value={password} placeholder="contraseña" onChange={handlePasswordChange} />
+          {error && <div className="error-message">Los datos ingresados no son correctos</div>}
+        </div>
+        <button type="Submit" >Iniciar sesion</button>
+        <Link className="recuperar-contraseña" to="/recuperar-contrasena">Olvidé mi contrasena</Link>
+      </form>
       </div>
     </div>
   )
