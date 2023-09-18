@@ -16,7 +16,7 @@
 
 .imagen-login {
   width: fit-content;
-  height: 100%;
+  height: fit-content;
   background-color: #fff;
   align-items: end;
   justify-content: flex-end;
@@ -50,7 +50,7 @@
     text-align: center;
     padding: 7vh;
     box-shadow: 0 5px 10px rgba(3, 13, 71, 0.7);
-    border-radius: 2px;
+    border-radius: 5px;
   }
 
   .login-title {
@@ -107,10 +107,5 @@
     color: red;
     font-size: 14px;
     margin-top: 15px;
-  }
-
-  .recuperar-contraseña {
-    margin-top: 20px;
-    font-size: 14px;
   }
 }

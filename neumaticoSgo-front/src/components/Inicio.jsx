@@ -1,4 +1,3 @@
-import React from 'react';
 import { Sidebar } from './Sidebar';
 import { NavBar } from './NavBar';
 import DelBarco from '../img/delbarco.png'
