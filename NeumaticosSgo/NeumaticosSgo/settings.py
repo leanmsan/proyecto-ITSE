@@ -43,12 +43,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'common',
-    'productos',
-    'apiLogin',
     'apiLogin2',
     'proveedores',
-    'rubros',
-    'movimientos'
+    'movimientos',
+    'insumos'
 ]
 
 REST_FRAMEWORK = {
@@ -113,9 +111,9 @@ WSGI_APPLICATION = 'NeumaticosSgo.wsgi.application'
 DATABASES = {
       'default': {
           'ENGINE': 'django.db.backends.mysql',
-          'NAME': 'NeumaticosSgo',
-          'USER': 'admin',
-          'PASSWORD': 'admin',
+          'NAME': 'del_barco',
+          'USER': 'root',
+          'PASSWORD': 'root',
           'HOST': '127.0.0.1',
           'PORT': '3306',
     }

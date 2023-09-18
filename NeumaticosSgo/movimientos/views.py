@@ -6,7 +6,7 @@ from common.models import (
     Salida,
     Salidadetalle,
     Proveedor,
-    Producto,
+    Insumo,
 )
 
 from django.views import View
@@ -61,12 +61,12 @@ class EntradaView(View):
                 fecha=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 montototal=jd["montototal"],
             )
-            last_inserted_id = entrada.identrada  # Obtener el último ID insertado
+            last_inserted_id = entrada.identrada
 
             datos = {
                 "mensaje": "success",
                 "last_inserted_id": last_inserted_id,
-            }  # Enviar el último ID insertado en la respuesta
+            }
         else:
             datos = {"mensaje": "El proveedor no existe"}
 
@@ -80,7 +80,7 @@ class EntradaView(View):
 
 @method_decorator(csrf_exempt, name="dispatch")
 class EntradadetalleView(View):
-    def get(self, request, id=0, prod=0):
+    def get(self, request, id=0, insumo=0):
         if id > 0:
             entradasdet = list(Entradadetalle.objects.filter(identrada=id).values())
             if len(entradasdet):
@@ -89,9 +89,9 @@ class EntradadetalleView(View):
                 datos = {"mensaje": "No se encontró el id de entrada"}
             return JsonResponse(datos)
         else:
-            if prod:
+            if insumo:
                 entradasdet = list(
-                    Entradadetalle.objects.filter(idproducto=prod).values()
+                    Entradadetalle.objects.filter(idInsumo=insumo).values()
                 )
             else:
                 entradasdet = list(Entradadetalle.objects.values())
@@ -109,7 +109,7 @@ class EntradadetalleView(View):
     def post(self, request):
         jd = json.loads(request.body)
         identrada_id = jd["identrada_id"]
-        idproducto_id = jd["idproducto_id"]
+        idinsumo_id = jd["idinsumo_id"]
 
         try:
             identrada = Entrada.objects.get(identrada=int(identrada_id))
@@ -118,20 +118,20 @@ class EntradadetalleView(View):
 
         if identrada:
             try:
-                idproducto = Producto.objects.get(idproducto=idproducto_id)
-            except Producto.DoesNotExist:
-                idproducto = None
+                idinsumo = Insumo.objects.get(idinsumo=idinsumo_id)
+            except Insumo.DoesNotExist:
+                idInsumo = None
 
-            if idproducto:
+            if idinsumo:
                 entrada = Entradadetalle.objects.create(
                     identrada=identrada,
-                    idproducto=idproducto,
+                    idInsumo=idinsumo,
                     cantidad=jd["cantidad"],
                     preciounitario=jd["preciounitario"],
                 )
                 datos = {"mensaje": "success"}
             else:
-                datos = {"mensaje": "El producto no existe"}
+                datos = {"mensaje": "El insumo no existe"}
         else:
             datos = {"mensaje": "La entrada no existe"}
 
@@ -185,12 +185,12 @@ class SalidaView(View):
                 fecha=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 montototal=jd["montototal"],
             )
-            last_inserted_id = entrada.identrada  # Obtener el último ID insertado
+            last_inserted_id = entrada.identrada
 
             datos = {
                 "mensaje": "success",
                 "last_inserted_id": last_inserted_id,
-            }  # Enviar el último ID insertado en la respuesta
+            }
         else:
             datos = {"mensaje": "El proveedor no existe"}
 
@@ -205,7 +205,7 @@ class SalidaView(View):
 
 @method_decorator(csrf_exempt, name="dispatch")
 class SalidadetalleView(View):
-    def get(self, request, id=0, prod=0):
+    def get(self, request, id=0, insumo=0):
         if id > 0:
             salidasdet = list(Salidadetalle.objects.filter(idsalida=id).values())
             if len(salidasdet) > 0:
@@ -213,9 +213,9 @@ class SalidadetalleView(View):
             else:
                 datos = {"mensaje": "No se encontró el ID de salida"}
         else:
-            if prod:
+            if insumo:
                 salidasdet = list(
-                    Salidadetalle.objects.filter(idproducto=prod).values()
+                    Salidadetalle.objects.filter(idinsumo=insumo).values()
                 )
             else:
                 salidasdet = list(Salidadetalle.objects.values())
@@ -234,7 +234,7 @@ class SalidadetalleView(View):
     def post(self, request):
         jd = json.loads(request.body)
         idsalida_id = jd["idsalida_id"]
-        idproducto_id = jd["idproducto_id"]
+        idinsumo_id = jd["idinsumo_id"]
         cantidad = jd["cantidad"]
         cantidad = int(cantidad)
 
@@ -245,15 +245,15 @@ class SalidadetalleView(View):
 
         if salida:
             try:
-                producto = Producto.objects.get(idproducto=idproducto_id)
-            except Producto.DoesNotExist:
-                producto = None
+                insumo = Insumo.objects.get(idinsumo=idinsumo_id)
+            except Insumo.DoesNotExist:
+                insumo = None
 
-            if producto:
-                if producto.stockdisponible >= cantidad:
+            if insumo:
+                if insumo.cantidad_disponible >= cantidad:
                     salidadetalle = Salidadetalle.objects.create(
                         idsalida=salida,
-                        idproducto=producto,
+                        idinsumo=insumo,
                         cantidad=cantidad,
                         preciounitario=jd["preciounitario"],
                     )
@@ -263,7 +263,7 @@ class SalidadetalleView(View):
                         "mensaje": "No hay suficiente stock disponible para realizar la salida"
                     }
             else:
-                datos = {"mensaje": "El producto no existe"}
+                datos = {"mensaje": "El insumo no existe"}
         else:
             datos = {"mensaje": "La salida no existe"}
         return JsonResponse(datos)
