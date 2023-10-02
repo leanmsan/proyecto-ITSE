@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from common.models import Proveedor
 from django.views import View
-from django.http.response import JsonResponse
+from django.http.response import JsonResponse, HttpResponse
 import json
 
 # Create your views here.
@@ -35,22 +35,23 @@ class ProveedorView(View):
 
     def post(self,request):
         jd = json.loads(request.body)
-        Proveedor.objects.create(cuitproveedor= jd['cuitproveedor'], nombre = jd['nombre'], razonsocial = jd['razonsocial'], direccion = jd['direccion'], localidad = jd['localidad'], provincia = jd['provincia'], contacto = jd['contacto'], estado = jd['estado'])
-        datos = {'mensaje': 'success'}
-        return JsonResponse(datos) 
-    
+        nombre= jd['nombre']
+        if Proveedor.objects.filter(nombre=nombre).exists():
+            datos = {'mensaje': 'Proveedor ya existente'}
+            return JsonResponse(datos, status=400)
+        else:
+            Proveedor.objects.create(nombre= jd['nombre'], mail = jd['mail'], telefono = jd['telefono'], estado = jd['estado'])
+            datos = {'mensaje': 'success'}
+        return JsonResponse(datos, status=201)
+
     def put(self,request,id):
         jd = json.loads(request.body)
         proveedores = list(Proveedor.objects.filter(idproveedor=id).values())
         if len(proveedores) > 0:
             proveedor = Proveedor.objects.get(idproveedor=id)
-            proveedor.cuitproveedor = jd['cuitproveedor']
             proveedor.nombre = jd['nombre']
-            proveedor.razonsocial = jd['razonsocial']
-            proveedor.direccion = jd['direccion']
-            proveedor.localidad = jd['localidad']
-            proveedor.provincia = jd['provincia']
-            proveedor.contacto = jd['contacto']
+            proveedor.mail = jd['mail']
+            proveedor.telefono = jd['telefono']
             proveedor.estado = jd['estado']
             proveedor.save()
             datos = {'mensaje': 'Proveedor actualizado correctamente'}
